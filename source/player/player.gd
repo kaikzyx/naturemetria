@@ -6,6 +6,7 @@ var speed := 100.0
 var damping := 10.0
 var direction := 1
 var jump_force := 250.0
+var knockback := 250.0
 
 func _physics_process(delta: float) -> void:
 	# Add horizontal movement.
@@ -23,3 +24,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y += ProjectSettings.get_setting(&"physics/2d/default_gravity") * delta
 
 	move_and_slide()
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	velocity.y = -knockback
+	area.owner.queue_free()
+
+func _on_hurtbox_body_entered(_body: Node2D) -> void:
+	queue_free()
