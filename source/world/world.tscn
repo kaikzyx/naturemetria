@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://pkesl7igbgxs"]
+[gd_scene load_steps=6 format=4 uid="uid://pkesl7igbgxs"]
 
 [ext_resource type="Texture2D" uid="uid://dgoorvc7mnk7n" path="res://assets/tile_set.png" id="1_dyj62"]
+[ext_resource type="Script" uid="uid://dltk7ixi5xdql" path="res://source/camera/camera.gd" id="1_ibvgw"]
 [ext_resource type="PackedScene" uid="uid://dk0bqnu20mg2a" path="res://source/player/player.tscn" id="2_hv7nm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n617u"]
@@ -28,6 +29,14 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_n617u")
 
 [node name="World" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+limit_left = 0
+limit_right = 640
+limit_bottom = 180
+position_smoothing_speed = 3.0
+script = ExtResource("1_ibvgw")
+target = NodePath("../Player")
 
 [node name="Map" type="TileMapLayer" parent="."]
 texture_filter = 1
