@@ -7,7 +7,7 @@
 size = Vector2(16, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyjp7"]
-size = Vector2(14, 1)
+size = Vector2(16, 1)
 
 [node name="Snail" type="CharacterBody2D"]
 collision_layer = 4
