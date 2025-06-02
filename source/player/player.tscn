@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk0bqnu20mg2a"]
+[gd_scene load_steps=9 format=3 uid="uid://dk0bqnu20mg2a"]
 
 [ext_resource type="Texture2D" uid="uid://evn4p5by1ap8" path="res://assets/player.png" id="1_jct2x"]
 [ext_resource type="Script" uid="uid://r1srmflo6cgp" path="res://source/player/player.gd" id="1_xim07"]
+[ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/state_machine/state_machine.gd" id="3_glqx2"]
+[ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/state_machine/state.gd" id="4_favdl"]
+[ext_resource type="Script" uid="uid://2igitawia1vj" path="res://source/state_machine/state_transition.gd" id="5_favdl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xim07"]
 radius = 6.0
@@ -40,5 +43,60 @@ collision_mask = 4
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_xim07")
 
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_glqx2")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://d67xl4368hk1"
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("4_favdl")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[node name="OnRun" type="Node" parent="StateMachine/IdleState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="OnJump" type="Node" parent="StateMachine/IdleState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="RunState" type="Node" parent="StateMachine"]
+script = ExtResource("4_favdl")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[node name="OnIdle" type="Node" parent="StateMachine/RunState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="OnJump" type="Node" parent="StateMachine/RunState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="JumpState" type="Node" parent="StateMachine"]
+script = ExtResource("4_favdl")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[node name="OnFall" type="Node" parent="StateMachine/JumpState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="FallState" type="Node" parent="StateMachine"]
+script = ExtResource("4_favdl")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[node name="OnIdle" type="Node" parent="StateMachine/FallState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="OnRun" type="Node" parent="StateMachine/FallState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="state_changed" from="StateMachine" to="." method="_on_state_machine_state_changed"]
+[connection signal="physics_updated" from="StateMachine/IdleState" to="." method="_on_idle_physics_updated"]
+[connection signal="physics_updated" from="StateMachine/RunState" to="." method="_on_run_physics_updated"]
+[connection signal="entered" from="StateMachine/JumpState" to="." method="_on_jump_state_entered"]
+[connection signal="physics_updated" from="StateMachine/JumpState" to="." method="_on_jump_state_physics_updated"]
+[connection signal="physics_updated" from="StateMachine/FallState" to="." method="_on_fall_state_physics_updated"]
