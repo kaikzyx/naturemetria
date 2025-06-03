@@ -60,6 +60,10 @@ metadata/_custom_type_script = "uid://2igitawia1vj"
 script = ExtResource("5_favdl")
 metadata/_custom_type_script = "uid://2igitawia1vj"
 
+[node name="OnDeadFreeze" type="Node" parent="StateMachine/IdleState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
 [node name="RunState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
@@ -72,11 +76,19 @@ metadata/_custom_type_script = "uid://2igitawia1vj"
 script = ExtResource("5_favdl")
 metadata/_custom_type_script = "uid://2igitawia1vj"
 
+[node name="OnDeadFreeze" type="Node" parent="StateMachine/RunState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
 
 [node name="OnFall" type="Node" parent="StateMachine/JumpState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="OnDead" type="Node" parent="StateMachine/JumpState"]
 script = ExtResource("5_favdl")
 metadata/_custom_type_script = "uid://2igitawia1vj"
 
@@ -92,6 +104,22 @@ metadata/_custom_type_script = "uid://2igitawia1vj"
 script = ExtResource("5_favdl")
 metadata/_custom_type_script = "uid://2igitawia1vj"
 
+[node name="OnDeadFreeze" type="Node" parent="StateMachine/FallState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="DeadFreezeState" type="Node" parent="StateMachine"]
+script = ExtResource("4_favdl")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[node name="OnDead" type="Node" parent="StateMachine/DeadFreezeState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="DeadState" type="Node" parent="StateMachine"]
+script = ExtResource("4_favdl")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="state_changed" from="StateMachine" to="." method="_on_state_machine_state_changed"]
@@ -100,3 +128,6 @@ metadata/_custom_type_script = "uid://2igitawia1vj"
 [connection signal="entered" from="StateMachine/JumpState" to="." method="_on_jump_state_entered"]
 [connection signal="physics_updated" from="StateMachine/JumpState" to="." method="_on_jump_state_physics_updated"]
 [connection signal="physics_updated" from="StateMachine/FallState" to="." method="_on_fall_state_physics_updated"]
+[connection signal="entered" from="StateMachine/DeadFreezeState" to="." method="_on_dead_freeze_state_entered"]
+[connection signal="entered" from="StateMachine/DeadState" to="." method="_on_dead_state_entered"]
+[connection signal="physics_updated" from="StateMachine/DeadState" to="." method="_on_dead_state_physics_updated"]
