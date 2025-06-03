@@ -1,9 +1,12 @@
 class_name Player extends CharacterBody2D
 
+signal died()
+
 @onready var _sprite: Sprite2D = $Sprite
 @onready var _state_machine: StateMachine = $StateMachine
 
 const _DEAD_FREEZE_TIME := 0.5
+const _DEAD_INTERVAL_TIME := 0.25
 const _DEAD_KNOCKBACK := 250.0
 const _DEAD_GRAVITY_FORCE := 500.0
 var speed := 100.0
@@ -93,8 +96,11 @@ func _on_dead_state_entered() -> void:
 func _on_dead_state_physics_updated(delta: float) -> void:
 	velocity.y += _DEAD_GRAVITY_FORCE * delta
 
-	# Exits the game when the player disappears from the screen.
+	# Emit died signal when the player disappears from the screen.
 	if global_position.y > get_viewport_rect().size.y:
-		get_tree().quit()
+		await get_tree().create_timer(_DEAD_INTERVAL_TIME).timeout
+
+		died.emit()
+		queue_free()
 
 #endregion

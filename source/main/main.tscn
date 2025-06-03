@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://m8nymm8b83qa"]
+
+[ext_resource type="Script" uid="uid://dun5am35ac1be" path="res://source/main/main.gd" id="1_62cc7"]
+[ext_resource type="PackedScene" uid="uid://pkesl7igbgxs" path="res://source/world/world.tscn" id="1_kaxhg"]
+
+[sub_resource type="Animation" id="Animation_n3iyj"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h5hv5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l81uv"]
+resource_name = "fade_out"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2a4ee"]
+_data = {
+&"RESET": SubResource("Animation_h5hv5"),
+&"fade_in": SubResource("Animation_n3iyj"),
+&"fade_out": SubResource("Animation_l81uv")
+}
+
+[node name="Main" type="Node" node_paths=PackedStringArray("current")]
+process_mode = 3
+script = ExtResource("1_62cc7")
+current = NodePath("SubViewportContainer/SubViewport/World")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+process_mode = 1
+texture_filter = 1
+custom_minimum_size = Vector2(320, 180)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -960.0
+offset_bottom = -540.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(320, 180)
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_kaxhg")]
+
+[node name="Transition" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="Transition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Animation" type="AnimationPlayer" parent="Transition"]
+libraries = {
+&"": SubResource("AnimationLibrary_2a4ee")
+}
