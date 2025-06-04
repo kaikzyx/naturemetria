@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal died()
 
-@onready var _sprite: Sprite2D = $Sprite
+@onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var _state_machine: StateMachine = $StateMachine
 
 const _DEAD_FREEZE_TIME := 0.5
@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	# Change the sprite direction.
-	_sprite.flip_h = direction == -1
+	_animated_sprite.flip_h = direction == -1
 
 	move_and_slide()
 
@@ -50,6 +50,9 @@ func _on_state_machine_state_changed(from: State, to: State) -> void:
 	var message := &"Player state changed from: {0}, to: {1}."
 	print(message.format([from.get_state_name() if from else &"null", to.get_state_name()]))
 
+func _on_idle_state_entered() -> void:
+	_animated_sprite.play(&"idle")
+
 func _on_idle_physics_updated(delta: float) -> void:
 	_system_movement(delta)
 	_system_gravity(delta)
@@ -57,6 +60,9 @@ func _on_idle_physics_updated(delta: float) -> void:
 	if _get_movement_direction() != 0: _state_machine.request_state(&"run")
 	if is_on_floor() and Input.is_action_just_pressed(&"jump"): _state_machine.request_state(&"jump")
 	if velocity.y > 0: _state_machine.request_state(&"fall")
+
+func _on_run_state_entered() -> void:
+	_animated_sprite.play(&"run")
 
 func _on_run_physics_updated(delta: float) -> void:
 	_system_movement(delta)
@@ -67,6 +73,7 @@ func _on_run_physics_updated(delta: float) -> void:
 	if velocity.y > 0: _state_machine.request_state(&"fall")
 
 func _on_jump_state_entered() -> void:
+	_animated_sprite.play(&"jump")
 	velocity.y = -jump_force
 
 func _on_jump_state_physics_updated(delta: float) -> void:
@@ -74,6 +81,9 @@ func _on_jump_state_physics_updated(delta: float) -> void:
 	_system_gravity(delta)
 
 	if velocity.y > 0: _state_machine.request_state(&"fall")
+
+func _on_fall_state_entered() -> void:
+	_animated_sprite.play(&"fall")
 
 func _on_fall_state_physics_updated(delta: float) -> void:
 	_system_movement(delta)
@@ -90,13 +100,15 @@ func _on_dead_freeze_state_entered() -> void:
 	collision_mask = 0
 	velocity = Vector2.ZERO
 	z_index = RenderingServer.CANVAS_ITEM_Z_MAX
-	_sprite.texture = preload("res://assets/player_death.png")
+	_animated_sprite.play(&"dead")
+	_animated_sprite.pause()
 
 	# Wait for the timer and the real state of death begins.
 	await get_tree().create_timer(_DEAD_FREEZE_TIME).timeout
 	_state_machine.request_state(&"dead")
 
 func _on_dead_state_entered() -> void:
+	_animated_sprite.play(&"dead")
 	velocity.y = -_DEAD_KNOCKBACK
 
 func _on_dead_state_physics_updated(delta: float) -> void:
