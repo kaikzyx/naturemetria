@@ -33,12 +33,13 @@ func  _system_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += ProjectSettings.get_setting(&"physics/2d/default_gravity") * delta
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	velocity.y = -knockback
-	area.owner.queue_free()
-
-func _on_hurtbox_body_entered(_body: Node2D) -> void:
-	_state_machine.request_state(&"dead_freeze")
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body is Snail:
+		if _state_machine.current_state.get_state_name() == &"fall":
+			velocity.y = -knockback
+			body.queue_free()
+		else:
+			_state_machine.request_state(&"dead_freeze")
 
 #region State machine callbacks.
 
