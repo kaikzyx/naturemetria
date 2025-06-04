@@ -40,7 +40,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body is Snail:
 		if _state_machine.current_state.get_state_name() == &"fall":
 			velocity.y = -knockback
-			body.queue_free()
+			body.kill()
 		else:
 			_state_machine.request_state(&"dead_freeze")
 

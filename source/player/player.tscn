@@ -98,7 +98,7 @@ script = ExtResource("1_xim07")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_fhjrr")
 animation = &"dead"
-frame_progress = 0.5679
+frame_progress = 0.834576
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_xim07")
