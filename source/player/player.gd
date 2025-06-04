@@ -56,6 +56,7 @@ func _on_idle_physics_updated(delta: float) -> void:
 
 	if _get_movement_direction() != 0: _state_machine.request_state(&"run")
 	if is_on_floor() and Input.is_action_just_pressed(&"jump"): _state_machine.request_state(&"jump")
+	if velocity.y > 0: _state_machine.request_state(&"fall")
 
 func _on_run_physics_updated(delta: float) -> void:
 	_system_movement(delta)
@@ -63,6 +64,7 @@ func _on_run_physics_updated(delta: float) -> void:
 
 	if _get_movement_direction() == 0: _state_machine.request_state(&"idle")
 	if is_on_floor() and Input.is_action_just_pressed(&"jump"): _state_machine.request_state(&"jump")
+	if velocity.y > 0: _state_machine.request_state(&"fall")
 
 func _on_jump_state_entered() -> void:
 	velocity.y = -jump_force

@@ -49,6 +49,10 @@ metadata/_custom_type_script = "uid://2igitawia1vj"
 script = ExtResource("5_favdl")
 metadata/_custom_type_script = "uid://2igitawia1vj"
 
+[node name="OnFall" type="Node" parent="StateMachine/IdleState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
 [node name="OnDeadFreeze" type="Node" parent="StateMachine/IdleState"]
 script = ExtResource("5_favdl")
 metadata/_custom_type_script = "uid://2igitawia1vj"
@@ -62,6 +66,10 @@ script = ExtResource("5_favdl")
 metadata/_custom_type_script = "uid://2igitawia1vj"
 
 [node name="OnJump" type="Node" parent="StateMachine/RunState"]
+script = ExtResource("5_favdl")
+metadata/_custom_type_script = "uid://2igitawia1vj"
+
+[node name="OnFall" type="Node" parent="StateMachine/RunState"]
 script = ExtResource("5_favdl")
 metadata/_custom_type_script = "uid://2igitawia1vj"
 
