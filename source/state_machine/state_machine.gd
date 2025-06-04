@@ -5,7 +5,7 @@ signal state_changed(from: State, to: State)
 @export var initial_state: State
 var current_state: State
 
-func _ready() -> void:
+func start() -> void:
 	assert(is_instance_valid(initial_state), "The state machine needs an initial state.")
 
 	# Initialize.

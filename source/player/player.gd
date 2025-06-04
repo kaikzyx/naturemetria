@@ -15,6 +15,9 @@ var direction := 1
 var jump_force := 250.0
 var knockback := 250.0
 
+func _ready() -> void:
+	_state_machine.start()
+
 func _physics_process(_delta: float) -> void:
 	# Change the sprite direction.
 	_sprite.flip_h = direction == -1
