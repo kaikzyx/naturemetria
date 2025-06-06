@@ -91,6 +91,7 @@ height = 20.0
 size = Vector2(10, 20)
 
 [node name="Player" type="CharacterBody2D"]
+process_mode = 3
 collision_layer = 2
 script = ExtResource("1_xim07")
 

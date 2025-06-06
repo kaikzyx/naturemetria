@@ -95,7 +95,6 @@ func _on_dead_freeze_state_entered() -> void:
 	get_tree().paused = true
 
 	# Configure player death.
-	process_mode = Node.PROCESS_MODE_ALWAYS
 	collision_layer = 0
 	collision_mask = 0
 	velocity = Vector2.ZERO
