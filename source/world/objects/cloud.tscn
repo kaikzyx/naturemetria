@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://c158y0p1pg5lx"]
+
+[ext_resource type="Texture2D" uid="uid://djtwjtcev5540" path="res://assets/cloud.png" id="1_cw5ly"]
+[ext_resource type="Script" uid="uid://bh8ivoasfyk72" path="res://source/world/objects/cloud.gd" id="1_pkah4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw5ly"]
+atlas = ExtResource("1_cw5ly")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o876"]
+atlas = ExtResource("1_cw5ly")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlykv"]
+atlas = ExtResource("1_cw5ly")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vqjg"]
+atlas = ExtResource("1_cw5ly")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkah4"]
+atlas = ExtResource("1_cw5ly")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4arc"]
+atlas = ExtResource("1_cw5ly")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq1ug"]
+atlas = ExtResource("1_cw5ly")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vrxm"]
+atlas = ExtResource("1_cw5ly")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2o876"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw5ly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o876")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlykv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vqjg")
+}],
+"loop": true,
+"name": &"heavy",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkah4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4arc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq1ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vrxm")
+}],
+"loop": true,
+"name": &"light",
+"speed": 2.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cw5ly"]
+size = Vector2(16, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkah4"]
+size = Vector2(8, 3)
+
+[node name="Cloud" type="StaticBody2D"]
+z_index = 1
+collision_mask = 0
+script = ExtResource("1_pkah4")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_2o876")
+animation = &"light"
+autoplay = "heavy"
+frame_progress = 0.193447
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cw5ly")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_pkah4")

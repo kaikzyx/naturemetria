@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cry54jyngct68"]
+
+[ext_resource type="Texture2D" uid="uid://cjkhbyjokoquu" path="res://assets/star.png" id="1_8wm5x"]
+[ext_resource type="Script" uid="uid://byx85ye1a40gi" path="res://source/world/objects/star.gd" id="1_lsdbc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsdbc"]
+atlas = ExtResource("1_8wm5x")
+region = Rect2(0, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bkmg"]
+atlas = ExtResource("1_8wm5x")
+region = Rect2(15, 0, 15, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vtuke"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsdbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bkmg")
+}],
+"loop": true,
+"name": &"shine",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lsdbc"]
+size = Vector2(15, 16)
+
+[node name="Star" type="CharacterBody2D"]
+collision_layer = 16
+script = ExtResource("1_lsdbc")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_vtuke")
+animation = &"shine"
+autoplay = "shine"
+frame_progress = 0.517187
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lsdbc")
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+target_position = Vector2(8, 0)
+collision_mask = 5

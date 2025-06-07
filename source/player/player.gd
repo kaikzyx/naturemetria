@@ -14,6 +14,7 @@ var damping := 10.0
 var direction := 1
 var jump_force := 250.0
 var knockback := 250.0
+var is_super := false
 
 func _ready() -> void:
 	_state_machine.start()
@@ -23,6 +24,12 @@ func _physics_process(_delta: float) -> void:
 	_animated_sprite.flip_h = direction == -1
 
 	move_and_slide()
+
+func damage() -> void:
+	if is_super:
+		_state_machine.request_state(&"transform")
+	else:
+		_state_machine.request_state(&"dead_freeze")
 
 func _get_movement_direction() -> int:
 	return Input.get_axis(&"move_left", &"move_right") as int
@@ -36,13 +43,25 @@ func  _system_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += ProjectSettings.get_setting(&"physics/2d/default_gravity") * delta
 
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	var area_owner := area.owner
+
+	if area_owner is Cloud:
+		if _state_machine.current_state.get_state_name() == &"jump":
+			area_owner.hit()
+		return
+
 func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body is Star:
+		_state_machine.request_state(&"transform")
+		body.queue_free()
+
 	if body is Snail:
 		if _state_machine.current_state.get_state_name() == &"fall":
 			velocity.y = -knockback
 			body.kill()
 		else:
-			_state_machine.request_state(&"dead_freeze")
+			damage()
 
 #region State machine callbacks.
 
@@ -51,7 +70,7 @@ func _on_state_machine_state_changed(from: State, to: State) -> void:
 	print(message.format([from.get_state_name() if from else &"null", to.get_state_name()]))
 
 func _on_idle_state_entered() -> void:
-	_animated_sprite.play(&"idle")
+	_animated_sprite.play(&"super_idle" if is_super else &"small_idle")
 
 func _on_idle_physics_updated(delta: float) -> void:
 	_system_movement(delta)
@@ -62,7 +81,7 @@ func _on_idle_physics_updated(delta: float) -> void:
 	if velocity.y > 0: _state_machine.request_state(&"fall")
 
 func _on_run_state_entered() -> void:
-	_animated_sprite.play(&"run")
+	_animated_sprite.play(&"super_run" if is_super else &"small_run")
 
 func _on_run_physics_updated(delta: float) -> void:
 	_system_movement(delta)
@@ -73,7 +92,7 @@ func _on_run_physics_updated(delta: float) -> void:
 	if velocity.y > 0: _state_machine.request_state(&"fall")
 
 func _on_jump_state_entered() -> void:
-	_animated_sprite.play(&"jump")
+	_animated_sprite.play(&"super_jump" if is_super else &"small_jump")
 	velocity.y = -jump_force
 
 func _on_jump_state_physics_updated(delta: float) -> void:
@@ -83,13 +102,27 @@ func _on_jump_state_physics_updated(delta: float) -> void:
 	if velocity.y > 0: _state_machine.request_state(&"fall")
 
 func _on_fall_state_entered() -> void:
-	_animated_sprite.play(&"fall")
+	_animated_sprite.play(&"super_fall" if is_super else &"small_fall")
 
 func _on_fall_state_physics_updated(delta: float) -> void:
 	_system_movement(delta)
 	_system_gravity(delta)
 
 	if is_on_floor(): _state_machine.request_state(&"idle" if _get_movement_direction() == 0 else &"run")
+
+func _on_transform_state_entered() -> void:
+	get_tree().paused = true
+	velocity = Vector2.ZERO
+	is_super = not is_super
+
+	if is_super:
+		_animated_sprite.play_backwards(&"transform")
+	else:
+		_animated_sprite.play(&"transform")
+
+	await _animated_sprite.animation_finished
+	get_tree().paused = false
+	_state_machine.request_state(&"idle")
 
 func _on_dead_freeze_state_entered() -> void:
 	get_tree().paused = true

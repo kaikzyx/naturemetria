@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://pkesl7igbgxs"]
+[gd_scene load_steps=14 format=4 uid="uid://pkesl7igbgxs"]
 
 [ext_resource type="Texture2D" uid="uid://dgoorvc7mnk7n" path="res://assets/tile_set.png" id="1_dyj62"]
 [ext_resource type="Script" uid="uid://dsulmggkuwghi" path="res://source/world/world.gd" id="1_geqj3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b70lil3my273w" path="res://assets/backgrounds/background_4.png" id="4_cga0s"]
 [ext_resource type="PackedScene" uid="uid://vuhaw14rmwsy" path="res://source/enemies/snail.tscn" id="4_pt5hk"]
 [ext_resource type="Script" uid="uid://6k3qy281jvia" path="res://source/world/trees/fractal_tree.gd" id="5_srwqi"]
+[ext_resource type="PackedScene" uid="uid://c158y0p1pg5lx" path="res://source/world/objects/cloud.tscn" id="11_1cxwb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n617u"]
 texture = ExtResource("1_dyj62")
@@ -99,5 +100,15 @@ position = Vector2(216, 120)
 
 [node name="Snail2" parent="." instance=ExtResource("4_pt5hk")]
 position = Vector2(312, 120)
+
+[node name="Cloud1" parent="." instance=ExtResource("11_1cxwb")]
+position = Vector2(496, 80)
+
+[node name="Cloud2" parent="." instance=ExtResource("11_1cxwb")]
+position = Vector2(512, 80)
+has_star = true
+
+[node name="Cloud3" parent="." instance=ExtResource("11_1cxwb")]
+position = Vector2(528, 80)
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
