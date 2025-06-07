@@ -19,6 +19,6 @@ target = NodePath("../Player")
 [node name="Level" parent="." instance=ExtResource("3_pt5hk")]
 
 [node name="Player" parent="." instance=ExtResource("2_hv7nm")]
-position = Vector2(160, 100)
+position = Vector2(160, 112)
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
