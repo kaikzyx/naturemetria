@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://vuhaw14rmwsy"]
+[gd_scene load_steps=10 format=3 uid="uid://vuhaw14rmwsy"]
 
 [ext_resource type="Script" uid="uid://8tkj3antpjgw" path="res://source/enemies/snail.gd" id="1_6j73w"]
 [ext_resource type="Texture2D" uid="uid://bq0a76bksc4th" path="res://assets/snail.png" id="1_mcwg6"]
 [ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/state_machine/state_machine.gd" id="3_2rht6"]
 [ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/state_machine/state.gd" id="4_4rk5c"]
-[ext_resource type="Script" uid="uid://2igitawia1vj" path="res://source/state_machine/state_transition.gd" id="5_4rk5c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4rk5c"]
 atlas = ExtResource("1_mcwg6")
@@ -75,10 +74,6 @@ metadata/_custom_type_script = "uid://d67xl4368hk1"
 [node name="PatrolState" type="Node" parent="StateMachine"]
 script = ExtResource("4_4rk5c")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
-
-[node name="OnDead" type="Node" parent="StateMachine/PatrolState"]
-script = ExtResource("5_4rk5c")
-metadata/_custom_type_script = "uid://2igitawia1vj"
 
 [node name="DeadState" type="Node" parent="StateMachine"]
 script = ExtResource("4_4rk5c")

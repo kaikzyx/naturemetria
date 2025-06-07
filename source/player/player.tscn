@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dk0bqnu20mg2a"]
+[gd_scene load_steps=23 format=3 uid="uid://dk0bqnu20mg2a"]
 
 [ext_resource type="Texture2D" uid="uid://evn4p5by1ap8" path="res://assets/player.png" id="1_jct2x"]
 [ext_resource type="Script" uid="uid://r1srmflo6cgp" path="res://source/player/player.gd" id="1_xim07"]
 [ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/state_machine/state_machine.gd" id="3_glqx2"]
 [ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/state_machine/state.gd" id="4_favdl"]
-[ext_resource type="Script" uid="uid://2igitawia1vj" path="res://source/state_machine/state_transition.gd" id="5_favdl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_favdl"]
 atlas = ExtResource("1_jct2x")
@@ -217,101 +216,25 @@ metadata/_custom_type_script = "uid://d67xl4368hk1"
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
 
-[node name="OnRun" type="Node" parent="StateMachine/IdleState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnJump" type="Node" parent="StateMachine/IdleState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnFall" type="Node" parent="StateMachine/IdleState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnTransform" type="Node" parent="StateMachine/IdleState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnDeadFreeze" type="Node" parent="StateMachine/IdleState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
 [node name="RunState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
-
-[node name="OnIdle" type="Node" parent="StateMachine/RunState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnJump" type="Node" parent="StateMachine/RunState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnFall" type="Node" parent="StateMachine/RunState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnTransform" type="Node" parent="StateMachine/RunState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnDeadFreeze" type="Node" parent="StateMachine/RunState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
 
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
 
-[node name="OnFall" type="Node" parent="StateMachine/JumpState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnTransform" type="Node" parent="StateMachine/JumpState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnDead" type="Node" parent="StateMachine/JumpState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
 [node name="FallState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
-
-[node name="OnIdle" type="Node" parent="StateMachine/FallState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnRun" type="Node" parent="StateMachine/FallState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnTransform" type="Node" parent="StateMachine/FallState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
-[node name="OnDeadFreeze" type="Node" parent="StateMachine/FallState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
 
 [node name="TransformState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
 
-[node name="OnIdle" type="Node" parent="StateMachine/TransformState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
-
 [node name="DeadFreezeState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
-
-[node name="OnDead" type="Node" parent="StateMachine/DeadFreezeState"]
-script = ExtResource("5_favdl")
-metadata/_custom_type_script = "uid://2igitawia1vj"
 
 [node name="DeadState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")

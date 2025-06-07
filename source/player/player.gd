@@ -47,7 +47,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	var area_owner := area.owner
 
 	if area_owner is Cloud:
-		if _state_machine.current_state.get_state_name() == &"jump":
+		if _state_machine.get_current_state() == &"jump":
 			area_owner.hit()
 		return
 
@@ -57,7 +57,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		body.queue_free()
 
 	if body is Snail:
-		if _state_machine.current_state.get_state_name() == &"fall":
+		if _state_machine.get_current_state() == &"fall":
 			velocity.y = -knockback
 			body.kill()
 		else:
@@ -65,9 +65,8 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 #region State machine callbacks.
 
-func _on_state_machine_state_changed(from: State, to: State) -> void:
-	var message := &"Player state changed from: {0}, to: {1}."
-	print(message.format([from.get_state_name() if from else &"null", to.get_state_name()]))
+func _on_state_machine_state_changed(_from: State, to: State) -> void:
+	print(&"Player state changed to: " + to.get_state_name())
 
 func _on_idle_state_entered() -> void:
 	_animated_sprite.play(&"super_idle" if is_super else &"small_idle")
