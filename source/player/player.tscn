@@ -1,17 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://dk0bqnu20mg2a"]
+[gd_scene load_steps=32 format=3 uid="uid://dk0bqnu20mg2a"]
 
 [ext_resource type="Texture2D" uid="uid://evn4p5by1ap8" path="res://assets/player.png" id="1_jct2x"]
 [ext_resource type="Script" uid="uid://r1srmflo6cgp" path="res://source/player/player.gd" id="1_xim07"]
 [ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/state_machine/state_machine.gd" id="3_glqx2"]
 [ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/state_machine/state.gd" id="4_favdl"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_glqx2"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(0, 96, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_favdl"]
 atlas = ExtResource("1_jct2x")
-region = Rect2(0, 64, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_asuwg"]
-atlas = ExtResource("1_jct2x")
-region = Rect2(16, 64, 16, 32)
+region = Rect2(16, 96, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2357"]
 atlas = ExtResource("1_jct2x")
@@ -33,33 +33,65 @@ region = Rect2(16, 0, 16, 32)
 atlas = ExtResource("1_jct2x")
 region = Rect2(0, 0, 16, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkki2"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(32, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4ysx"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(16, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clmmo"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(0, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggjli"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(32, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asuwg"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(16, 160, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_72fmy"]
-atlas = ExtResource("1_jct2x")
-region = Rect2(16, 128, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_li2ga"]
-atlas = ExtResource("1_jct2x")
-region = Rect2(0, 96, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f4mop"]
 atlas = ExtResource("1_jct2x")
 region = Rect2(0, 128, 16, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_li2ga"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(0, 160, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4mop"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(32, 128, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0os5"]
 atlas = ExtResource("1_jct2x")
-region = Rect2(32, 96, 16, 32)
+region = Rect2(16, 128, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8va7w"]
 atlas = ExtResource("1_jct2x")
-region = Rect2(16, 96, 16, 32)
+region = Rect2(0, 128, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnvfq"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(16, 192, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28hxr"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(32, 192, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k00wa"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(0, 192, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpj85"]
+atlas = ExtResource("1_jct2x")
+region = Rect2(16, 192, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1lkv"]
 atlas = ExtResource("1_jct2x")
-region = Rect2(0, 96, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fkki2"]
-atlas = ExtResource("1_jct2x")
-region = Rect2(0, 96, 16, 32)
+region = Rect2(0, 128, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v5tg1"]
 atlas = ExtResource("1_jct2x")
@@ -69,10 +101,10 @@ region = Rect2(0, 0, 16, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_favdl")
+"texture": SubResource("AtlasTexture_glqx2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_asuwg")
+"texture": SubResource("AtlasTexture_favdl")
 }],
 "loop": true,
 "name": &"dead",
@@ -115,7 +147,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_72fmy")
+"texture": SubResource("AtlasTexture_fkki2")
+}],
+"loop": true,
+"name": &"small_swin_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4ysx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clmmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggjli")
+}],
+"loop": true,
+"name": &"small_swin_move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asuwg")
 }],
 "loop": true,
 "name": &"super_fall",
@@ -123,7 +177,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_li2ga")
+"texture": SubResource("AtlasTexture_72fmy")
 }],
 "loop": true,
 "name": &"super_idle",
@@ -131,7 +185,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f4mop")
+"texture": SubResource("AtlasTexture_li2ga")
 }],
 "loop": true,
 "name": &"super_jump",
@@ -139,13 +193,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_f4mop")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_a0os5")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8va7w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w1lkv")
 }],
 "loop": true,
 "name": &"super_run",
@@ -153,19 +207,41 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fkki2")
+"texture": SubResource("AtlasTexture_pnvfq")
+}],
+"loop": true,
+"name": &"super_swin_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28hxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k00wa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpj85")
+}],
+"loop": true,
+"name": &"super_swin_move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1lkv")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v5tg1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fkki2")
+"texture": SubResource("AtlasTexture_w1lkv")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v5tg1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fkki2")
+"texture": SubResource("AtlasTexture_w1lkv")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v5tg1")
@@ -182,6 +258,9 @@ height = 20.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xim07"]
 size = Vector2(12, 21)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_glqx2"]
+radius = 6.0
+
 [node name="Player" type="CharacterBody2D"]
 process_mode = 3
 collision_layer = 2
@@ -192,7 +271,8 @@ script = ExtResource("1_xim07")
 texture_filter = 1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_fhjrr")
-animation = &"small_idle"
+animation = &"small_swin_move"
+frame_progress = 0.477167
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
@@ -206,6 +286,14 @@ collision_mask = 28
 [node name="Collision" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_xim07")
+
+[node name="WaterDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="Collision" type="CollisionShape2D" parent="WaterDetector"]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_glqx2")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_glqx2")
@@ -228,6 +316,14 @@ metadata/_custom_type_script = "uid://t3w6cos70bby"
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
 
+[node name="SwinIdleState" type="Node" parent="StateMachine"]
+script = ExtResource("4_favdl")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[node name="SwinMoveState" type="Node" parent="StateMachine"]
+script = ExtResource("4_favdl")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
 [node name="TransformState" type="Node" parent="StateMachine"]
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
@@ -242,6 +338,9 @@ metadata/_custom_type_script = "uid://t3w6cos70bby"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="body_entered" from="WaterDetector" to="." method="_on_water_detector_body_entered"]
+[connection signal="body_exited" from="WaterDetector" to="." method="_on_water_detector_body_exited"]
 [connection signal="state_changed" from="StateMachine" to="." method="_on_state_machine_state_changed"]
 [connection signal="entered" from="StateMachine/IdleState" to="." method="_on_idle_state_entered"]
 [connection signal="physics_updated" from="StateMachine/IdleState" to="." method="_on_idle_physics_updated"]
@@ -251,6 +350,10 @@ metadata/_custom_type_script = "uid://t3w6cos70bby"
 [connection signal="physics_updated" from="StateMachine/JumpState" to="." method="_on_jump_state_physics_updated"]
 [connection signal="entered" from="StateMachine/FallState" to="." method="_on_fall_state_entered"]
 [connection signal="physics_updated" from="StateMachine/FallState" to="." method="_on_fall_state_physics_updated"]
+[connection signal="entered" from="StateMachine/SwinIdleState" to="." method="_on_swin_idle_state_entered"]
+[connection signal="physics_updated" from="StateMachine/SwinIdleState" to="." method="_on_swin_idle_state_physics_updated"]
+[connection signal="entered" from="StateMachine/SwinMoveState" to="." method="_on_swin_move_state_entered"]
+[connection signal="physics_updated" from="StateMachine/SwinMoveState" to="." method="_on_swin_move_state_physics_updated"]
 [connection signal="entered" from="StateMachine/TransformState" to="." method="_on_transform_state_entered"]
 [connection signal="entered" from="StateMachine/DeadFreezeState" to="." method="_on_dead_freeze_state_entered"]
 [connection signal="entered" from="StateMachine/DeadState" to="." method="_on_dead_state_entered"]

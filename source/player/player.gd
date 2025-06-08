@@ -31,17 +31,24 @@ func damage() -> void:
 	else:
 		_state_machine.request_state(&"dead_freeze")
 
-func _get_movement_direction() -> int:
+func _get_horizontal_direction() -> int:
 	return Input.get_axis(&"move_left", &"move_right") as int
 
-func _system_movement(delta: float) -> void:
-	var movement := _get_movement_direction()
+func _get_vertical_direction() -> int:
+	return Input.get_axis(&"move_up", &"move_down") as int
+
+func _platform_movement(delta: float) -> void:
+	var movement := _get_horizontal_direction()
 	velocity.x = lerp(velocity.x, movement * speed, damping * delta)
 	if movement != 0: direction = movement
 
-func  _system_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += ProjectSettings.get_setting(&"physics/2d/default_gravity") * delta
+
+func _top_down_movement(delta: float) -> void:
+	var movement := Vector2(_get_horizontal_direction(), _get_vertical_direction()).normalized()
+	velocity = velocity.lerp(movement * speed, damping * delta)
+	if movement.x != 0: direction = sign(movement.x)
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	var area_owner := area.owner
@@ -63,6 +70,12 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		else:
 			damage()
 
+func _on_water_detector_body_entered(_body: Node2D) -> void:
+	_state_machine.request_state(&"swin_idle")
+
+func _on_water_detector_body_exited(_body: Node2D) -> void:
+	_state_machine.request_state(&"jump")
+
 #region State machine callbacks.
 
 func _on_state_machine_state_changed(_from: State, to: State) -> void:
@@ -72,10 +85,9 @@ func _on_idle_state_entered() -> void:
 	_animated_sprite.play(&"super_idle" if is_super else &"small_idle")
 
 func _on_idle_physics_updated(delta: float) -> void:
-	_system_movement(delta)
-	_system_gravity(delta)
+	_platform_movement(delta)
 
-	if _get_movement_direction() != 0: _state_machine.request_state(&"run")
+	if _get_horizontal_direction() != 0: _state_machine.request_state(&"run")
 	if is_on_floor() and Input.is_action_just_pressed(&"jump"): _state_machine.request_state(&"jump")
 	if velocity.y > 0: _state_machine.request_state(&"fall")
 
@@ -83,10 +95,9 @@ func _on_run_state_entered() -> void:
 	_animated_sprite.play(&"super_run" if is_super else &"small_run")
 
 func _on_run_physics_updated(delta: float) -> void:
-	_system_movement(delta)
-	_system_gravity(delta)
+	_platform_movement(delta)
 
-	if _get_movement_direction() == 0: _state_machine.request_state(&"idle")
+	if _get_horizontal_direction() == 0: _state_machine.request_state(&"idle")
 	if is_on_floor() and Input.is_action_just_pressed(&"jump"): _state_machine.request_state(&"jump")
 	if velocity.y > 0: _state_machine.request_state(&"fall")
 
@@ -95,8 +106,7 @@ func _on_jump_state_entered() -> void:
 	velocity.y = -jump_force
 
 func _on_jump_state_physics_updated(delta: float) -> void:
-	_system_movement(delta)
-	_system_gravity(delta)
+	_platform_movement(delta)
 
 	if velocity.y > 0: _state_machine.request_state(&"fall")
 
@@ -104,10 +114,27 @@ func _on_fall_state_entered() -> void:
 	_animated_sprite.play(&"super_fall" if is_super else &"small_fall")
 
 func _on_fall_state_physics_updated(delta: float) -> void:
-	_system_movement(delta)
-	_system_gravity(delta)
+	_platform_movement(delta)
 
-	if is_on_floor(): _state_machine.request_state(&"idle" if _get_movement_direction() == 0 else &"run")
+	if is_on_floor(): _state_machine.request_state(&"idle" if _get_horizontal_direction() == 0 else &"run")
+
+func _on_swin_idle_state_entered() -> void:
+	_animated_sprite.play(&"super_swin_idle" if is_super else &"small_swin_idle")
+
+func _on_swin_idle_state_physics_updated(delta: float) -> void:
+	velocity = velocity.lerp(Vector2.ZERO, damping * delta)
+
+	if _get_horizontal_direction() != 0 or _get_vertical_direction() != 0:
+		_state_machine.request_state(&"swin_move")
+
+func _on_swin_move_state_entered() -> void:
+	_animated_sprite.play(&"super_swin_move" if is_super else &"small_swin_move")
+
+func _on_swin_move_state_physics_updated(delta: float) -> void:
+	_top_down_movement(delta)
+
+	if _get_horizontal_direction() == 0 and _get_vertical_direction() == 0:
+		_state_machine.request_state(&"swin_idle")
 
 func _on_transform_state_entered() -> void:
 	get_tree().paused = true
