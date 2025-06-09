@@ -5,15 +5,15 @@ signal died()
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var _state_machine: StateMachine = $StateMachine
 
+const _SPEED := 100.0
+const _SPEED_DAMPING := 10.0
+const _JUMP_FORCE := 250.0
+const _KNOCKBACK_FORCE := 250.0
 const _DEAD_FREEZE_TIME := 0.5
 const _DEAD_INTERVAL_TIME := 0.25
 const _DEAD_KNOCKBACK := 250.0
 const _DEAD_GRAVITY_FORCE := 500.0
-var speed := 100.0
-var damping := 10.0
 var direction := 1
-var jump_force := 250.0
-var knockback := 250.0
 var is_super := false
 
 func _ready() -> void:
@@ -40,7 +40,7 @@ func _get_vertical_direction() -> int:
 
 func _platform_movement(delta: float) -> void:
 	var movement := _get_horizontal_direction()
-	velocity.x = lerp(velocity.x, movement * speed, damping * delta)
+	velocity.x = lerp(velocity.x, movement * _SPEED, _SPEED_DAMPING * delta)
 	if movement != 0: direction = movement
 
 	if not is_on_floor():
@@ -48,7 +48,7 @@ func _platform_movement(delta: float) -> void:
 
 func _top_down_movement(delta: float) -> void:
 	var movement := Vector2(_get_horizontal_direction(), _get_vertical_direction()).normalized()
-	velocity = velocity.lerp(movement * speed, damping * delta)
+	velocity = velocity.lerp(movement * _SPEED, _SPEED_DAMPING * delta)
 	if movement.x != 0: direction = sign(movement.x)
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
@@ -66,7 +66,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 	if body is Enemy:
 		if _state_machine.get_current_state() == &"fall":
-			velocity.y = -knockback
+			velocity.y = -_KNOCKBACK_FORCE
 			body.kill()
 		else:
 			damage()
@@ -104,7 +104,7 @@ func _on_run_physics_updated(delta: float) -> void:
 
 func _on_jump_state_entered() -> void:
 	_animated_sprite.play(&"super_jump" if is_super else &"small_jump")
-	velocity.y = -jump_force
+	velocity.y = -_JUMP_FORCE
 
 func _on_jump_state_physics_updated(delta: float) -> void:
 	_platform_movement(delta)
@@ -123,7 +123,7 @@ func _on_swin_idle_state_entered() -> void:
 	_animated_sprite.play(&"super_swin_idle" if is_super else &"small_swin_idle")
 
 func _on_swin_idle_state_physics_updated(delta: float) -> void:
-	velocity = velocity.lerp(Vector2.ZERO, damping * delta)
+	velocity = velocity.lerp(Vector2.ZERO, _SPEED_DAMPING * delta)
 
 	if _get_horizontal_direction() != 0 or _get_vertical_direction() != 0:
 		_state_machine.request_state(&"swin_move")
