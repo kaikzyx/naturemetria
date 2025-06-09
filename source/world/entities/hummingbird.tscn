@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://do6m7b2impyn7"]
 
-[ext_resource type="Script" uid="uid://ch4kbe381rkre" path="res://source/enemies/hummingbird.gd" id="1_ud04h"]
-[ext_resource type="Texture2D" uid="uid://chie0tu65fvjd" path="res://assets/hummingbird.png" id="2_g7xta"]
-[ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/state_machine/state_machine.gd" id="3_drokn"]
-[ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/state_machine/state.gd" id="4_ehehp"]
+[ext_resource type="Script" uid="uid://ch4kbe381rkre" path="res://source/world/entities/hummingbird.gd" id="1_ud04h"]
+[ext_resource type="Texture2D" uid="uid://chie0tu65fvjd" path="res://assets/images/entities/hummingbird.png" id="2_g7xta"]
+[ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/core/state_machine/state_machine.gd" id="3_drokn"]
+[ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/core/state_machine/state.gd" id="4_ehehp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhbwu"]
 atlas = ExtResource("2_g7xta")

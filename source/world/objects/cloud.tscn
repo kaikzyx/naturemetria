@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://c158y0p1pg5lx"]
 
-[ext_resource type="Texture2D" uid="uid://djtwjtcev5540" path="res://assets/cloud.png" id="1_cw5ly"]
+[ext_resource type="Texture2D" uid="uid://djtwjtcev5540" path="res://assets/images/objects/cloud.png" id="1_cw5ly"]
 [ext_resource type="Script" uid="uid://bh8ivoasfyk72" path="res://source/world/objects/cloud.gd" id="1_pkah4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cw5ly"]

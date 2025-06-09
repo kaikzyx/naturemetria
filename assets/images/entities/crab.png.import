@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chie0tu65fvjd"
-path="res://.godot/imported/hummingbird.png-3a60497d6830a06e5986819ea06fb8a2.ctex"
+uid="uid://diqcy7mvebyat"
+path="res://.godot/imported/crab.png-823412b357484ae983b30bc91b7b0b51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hummingbird.png"
-dest_files=["res://.godot/imported/hummingbird.png-3a60497d6830a06e5986819ea06fb8a2.ctex"]
+source_file="res://assets/images/entities/crab.png"
+dest_files=["res://.godot/imported/crab.png-823412b357484ae983b30bc91b7b0b51.ctex"]
 
 [params]
 

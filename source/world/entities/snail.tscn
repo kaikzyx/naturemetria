@@ -1,27 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://b84l55jia625v"]
+[gd_scene load_steps=10 format=3 uid="uid://vuhaw14rmwsy"]
 
-[ext_resource type="Script" uid="uid://dxaccehjxt2fg" path="res://source/enemies/crab.gd" id="1_katqa"]
-[ext_resource type="Texture2D" uid="uid://diqcy7mvebyat" path="res://assets/crab.png" id="2_y3heo"]
-[ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/state_machine/state_machine.gd" id="3_qsw23"]
-[ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/state_machine/state.gd" id="4_uj23e"]
+[ext_resource type="Script" uid="uid://8tkj3antpjgw" path="res://source/world/entities/snail.gd" id="1_6j73w"]
+[ext_resource type="Texture2D" uid="uid://bq0a76bksc4th" path="res://assets/images/entities/snail.png" id="1_mcwg6"]
+[ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/core/state_machine/state_machine.gd" id="3_2rht6"]
+[ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/core/state_machine/state.gd" id="4_4rk5c"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qsw23"]
-atlas = ExtResource("2_y3heo")
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rk5c"]
+atlas = ExtResource("1_mcwg6")
+region = Rect2(0, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uj23e"]
-atlas = ExtResource("2_y3heo")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j73w"]
+atlas = ExtResource("1_mcwg6")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwjkb"]
-atlas = ExtResource("2_y3heo")
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyjp7"]
+atlas = ExtResource("1_mcwg6")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_iwjkb"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rht6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qsw23")
+"texture": SubResource("AtlasTexture_4rk5c")
 }],
 "loop": true,
 "name": &"dead",
@@ -29,32 +29,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uj23e")
+"texture": SubResource("AtlasTexture_6j73w")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iwjkb")
+"texture": SubResource("AtlasTexture_cyjp7")
 }],
 "loop": true,
 "name": &"patrol",
-"speed": 4.0
+"speed": 1.75
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iinyl"]
-size = Vector2(16, 16)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6j73w"]
+size = Vector2(16, 13)
 
-[node name="Crab" type="CharacterBody2D"]
+[node name="Snail" type="CharacterBody2D"]
 collision_layer = 4
-script = ExtResource("1_katqa")
+script = ExtResource("1_6j73w")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_iwjkb")
+sprite_frames = SubResource("SpriteFrames_2rht6")
 animation = &"patrol"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_iinyl")
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_6j73w")
 
 [node name="RayCasts" type="Node2D" parent="."]
 position = Vector2(0, -8)
@@ -69,16 +69,16 @@ position = Vector2(6, 5)
 target_position = Vector2(0, 4)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_qsw23")
+script = ExtResource("3_2rht6")
 initial_state = NodePath("PatrolState")
 metadata/_custom_type_script = "uid://d67xl4368hk1"
 
 [node name="PatrolState" type="Node" parent="StateMachine"]
-script = ExtResource("4_uj23e")
+script = ExtResource("4_4rk5c")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
 
 [node name="DeadState" type="Node" parent="StateMachine"]
-script = ExtResource("4_uj23e")
+script = ExtResource("4_4rk5c")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
 
 [connection signal="entered" from="StateMachine/PatrolState" to="." method="_on_patrol_state_entered"]

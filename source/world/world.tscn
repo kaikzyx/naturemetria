@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://pkesl7igbgxs"]
 
 [ext_resource type="Script" uid="uid://dsulmggkuwghi" path="res://source/world/world.gd" id="1_geqj3"]
-[ext_resource type="Script" uid="uid://dltk7ixi5xdql" path="res://source/camera/camera.gd" id="1_ibvgw"]
-[ext_resource type="PackedScene" uid="uid://dk0bqnu20mg2a" path="res://source/player/player.tscn" id="2_hv7nm"]
+[ext_resource type="Script" uid="uid://dltk7ixi5xdql" path="res://source/world/camera/camera.gd" id="1_ibvgw"]
+[ext_resource type="PackedScene" uid="uid://dk0bqnu20mg2a" path="res://source/world/entities/player.tscn" id="2_hv7nm"]
 [ext_resource type="PackedScene" uid="uid://dr6glxq3vb3j6" path="res://source/world/levels/level.tscn" id="3_pt5hk"]
 
 [node name="World" type="Node2D"]
