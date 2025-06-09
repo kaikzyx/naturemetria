@@ -17,6 +17,7 @@ var knockback := 250.0
 var is_super := false
 
 func _ready() -> void:
+	Global.player = self
 	_state_machine.start()
 
 func _physics_process(_delta: float) -> void:
@@ -63,7 +64,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		_state_machine.request_state(&"transform")
 		body.queue_free()
 
-	if body is Snail:
+	if body is Enemy:
 		if _state_machine.get_current_state() == &"fall":
 			velocity.y = -knockback
 			body.kill()

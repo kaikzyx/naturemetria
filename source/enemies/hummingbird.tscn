@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://do6m7b2impyn7"]
+
+[ext_resource type="Script" uid="uid://ch4kbe381rkre" path="res://source/enemies/hummingbird.gd" id="1_ud04h"]
+[ext_resource type="Texture2D" uid="uid://chie0tu65fvjd" path="res://assets/hummingbird.png" id="2_g7xta"]
+[ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/state_machine/state_machine.gd" id="3_drokn"]
+[ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/state_machine/state.gd" id="4_ehehp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhbwu"]
+atlas = ExtResource("2_g7xta")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86u1q"]
+atlas = ExtResource("2_g7xta")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cb1hn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhbwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86u1q")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ukkp1"]
+size = Vector2(10, 14)
+
+[node name="Hummingbird" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ud04h")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_cb1hn")
+animation = &"fly"
+autoplay = "fly"
+frame_progress = 0.279957
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ukkp1")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_drokn")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://d67xl4368hk1"
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("4_ehehp")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[node name="MoveState" type="Node" parent="StateMachine"]
+script = ExtResource("4_ehehp")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[node name="DeadState" type="Node" parent="StateMachine"]
+script = ExtResource("4_ehehp")
+metadata/_custom_type_script = "uid://t3w6cos70bby"
+
+[connection signal="entered" from="StateMachine/IdleState" to="." method="_on_idle_state_entered"]
+[connection signal="physics_updated" from="StateMachine/IdleState" to="." method="_on_idle_state_physics_updated"]
+[connection signal="physics_updated" from="StateMachine/MoveState" to="." method="_on_move_state_physics_updated"]
+[connection signal="entered" from="StateMachine/DeadState" to="." method="_on_dead_state_entered"]
+[connection signal="physics_updated" from="StateMachine/DeadState" to="." method="_on_dead_state_physics_updated"]

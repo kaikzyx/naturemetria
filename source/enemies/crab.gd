@@ -8,7 +8,7 @@ extends Enemy
 
 const _DEAD_TIME := 1
 const _DEAD_FADE_TIME := 0.25
-var speed := 500.0
+var speed := 750.0
 var direction := 1
 
 func _ready() -> void:

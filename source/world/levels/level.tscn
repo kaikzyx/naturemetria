@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dr6glxq3vb3j6"]
+[gd_scene load_steps=16 format=4 uid="uid://dr6glxq3vb3j6"]
 
 [ext_resource type="Texture2D" uid="uid://cc2ciga67b0ay" path="res://assets/backgrounds/background_1.png" id="1_hce5v"]
 [ext_resource type="Texture2D" uid="uid://dbxym2nd0nw1x" path="res://assets/backgrounds/background_2.png" id="2_l0j7f"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://c158y0p1pg5lx" path="res://source/world/objects/cloud.tscn" id="7_7l1od"]
 [ext_resource type="Texture2D" uid="uid://dwhvgcnsoe83q" path="res://assets/water_tile_set.png" id="7_l0j7f"]
 [ext_resource type="PackedScene" uid="uid://vuhaw14rmwsy" path="res://source/enemies/snail.tscn" id="8_7ij3s"]
+[ext_resource type="PackedScene" uid="uid://b84l55jia625v" path="res://source/enemies/crab.tscn" id="10_lks5m"]
+[ext_resource type="PackedScene" uid="uid://do6m7b2impyn7" path="res://source/enemies/hummingbird.tscn" id="11_8twro"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kh7vn"]
 texture = ExtResource("6_7fqnn")
@@ -124,3 +126,12 @@ position = Vector2(224, 128)
 
 [node name="Snail2" parent="." instance=ExtResource("8_7ij3s")]
 position = Vector2(288, 128)
+
+[node name="Crab1" parent="." instance=ExtResource("10_lks5m")]
+position = Vector2(624, 96)
+
+[node name="Crab2" parent="." instance=ExtResource("10_lks5m")]
+position = Vector2(672, 96)
+
+[node name="Hummingbird" parent="." instance=ExtResource("11_8twro")]
+position = Vector2(464, 112)
