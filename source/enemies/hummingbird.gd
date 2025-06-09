@@ -10,6 +10,7 @@ const _DEAD_KNOCKBACK := 100.0
 const _DEAD_ROTATION_VELOCITY := 10.0
 
 func _ready() -> void:
+	_animated_sprite.play(&"fly")
 	_state_machine.start()
 
 func _physics_process(_delta: float) -> void:

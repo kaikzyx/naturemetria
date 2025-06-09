@@ -40,8 +40,7 @@ texture_filter = 1
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_cb1hn")
 animation = &"fly"
-autoplay = "fly"
-frame_progress = 0.279957
+flip_h = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
