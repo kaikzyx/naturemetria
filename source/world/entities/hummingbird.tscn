@@ -31,6 +31,7 @@ animations = [{
 size = Vector2(10, 14)
 
 [node name="Hummingbird" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_ud04h")
