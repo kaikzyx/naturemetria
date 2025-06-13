@@ -271,8 +271,7 @@ script = ExtResource("1_xim07")
 texture_filter = 1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_fhjrr")
-animation = &"small_swin_move"
-frame_progress = 0.477167
+animation = &"small_idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
