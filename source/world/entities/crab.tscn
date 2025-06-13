@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b84l55jia625v"]
 
 [ext_resource type="Script" uid="uid://dxaccehjxt2fg" path="res://source/world/entities/crab.gd" id="1_katqa"]
-[ext_resource type="Texture2D" uid="uid://diqcy7mvebyat" path="res://assets/images/entities/crab.png" id="2_y3heo"]
+[ext_resource type="Texture2D" uid="uid://dx65tor5qaid7" path="res://assets/images/entities/crab.png" id="2_y3heo"]
 [ext_resource type="Script" uid="uid://d67xl4368hk1" path="res://source/core/state_machine/state_machine.gd" id="3_qsw23"]
 [ext_resource type="Script" uid="uid://t3w6cos70bby" path="res://source/core/state_machine/state.gd" id="4_uj23e"]
 
