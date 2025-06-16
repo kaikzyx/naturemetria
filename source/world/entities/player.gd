@@ -1,6 +1,9 @@
 class_name Player extends CharacterBody2D
 
 signal died()
+signal transformed(status: bool)
+signal killed()
+signal consumed()
 
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var _state_machine: StateMachine = $StateMachine
@@ -63,11 +66,13 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body is Star:
 		_state_machine.request_state(&"transform")
 		body.queue_free()
+		consumed.emit()
 
 	if body is Enemy:
 		if _state_machine.get_current_state() == &"fall":
 			velocity.y = -_KNOCKBACK_FORCE
 			body.kill()
+			killed.emit()
 		else:
 			damage()
 
@@ -141,6 +146,7 @@ func _on_transform_state_entered() -> void:
 	get_tree().paused = true
 	velocity = Vector2.ZERO
 	is_super = not is_super
+	transformed.emit(is_super)
 
 	if is_super:
 		_animated_sprite.play_backwards(&"transform")

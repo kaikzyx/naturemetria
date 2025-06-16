@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://pkesl7igbgxs"]
+[gd_scene load_steps=6 format=3 uid="uid://pkesl7igbgxs"]
 
 [ext_resource type="Script" uid="uid://dsulmggkuwghi" path="res://source/world/world.gd" id="1_geqj3"]
 [ext_resource type="Script" uid="uid://dltk7ixi5xdql" path="res://source/world/camera/camera.gd" id="1_ibvgw"]
 [ext_resource type="PackedScene" uid="uid://dk0bqnu20mg2a" path="res://source/world/entities/player.tscn" id="2_hv7nm"]
 [ext_resource type="PackedScene" uid="uid://dr6glxq3vb3j6" path="res://source/world/levels/level.tscn" id="3_pt5hk"]
+[ext_resource type="PackedScene" uid="uid://cfxr57uuj8y5x" path="res://source/interface/word_ui.tscn" id="5_srwqi"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_geqj3")
@@ -21,4 +22,9 @@ target = NodePath("../Player")
 [node name="Player" parent="." instance=ExtResource("2_hv7nm")]
 position = Vector2(160, 112)
 
+[node name="WordUI" parent="." instance=ExtResource("5_srwqi")]
+
+[connection signal="consumed" from="Player" to="." method="_on_player_consumed"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="killed" from="Player" to="." method="_on_player_killed"]
+[connection signal="transformed" from="Player" to="." method="_on_player_transformed"]
