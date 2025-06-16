@@ -62,6 +62,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			area_owner.hit()
 		return
 
+
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body is Star:
 		_state_machine.request_state(&"transform")
@@ -144,6 +145,7 @@ func _on_swin_move_state_physics_updated(delta: float) -> void:
 
 func _on_transform_state_entered() -> void:
 	get_tree().paused = true
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	velocity = Vector2.ZERO
 	is_super = not is_super
 	transformed.emit(is_super)
@@ -155,12 +157,14 @@ func _on_transform_state_entered() -> void:
 
 	await _animated_sprite.animation_finished
 	get_tree().paused = false
+	process_mode = Node.PROCESS_MODE_INHERIT
 	_state_machine.request_state(&"idle")
 
 func _on_dead_freeze_state_entered() -> void:
 	get_tree().paused = true
 
 	# Configure player death.
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	collision_layer = 0
 	collision_mask = 0
 	velocity = Vector2.ZERO

@@ -41,4 +41,4 @@ func _process(delta: float) -> void:
 
 	# Start the game.
 	if Input.is_action_just_pressed(&"start_game"):
-		Global.main.change_scene(preload("res://source/world/world.tscn"), 1.5)
+		Global.main.change_scene(load("res://source/world/world.tscn"), 1.5)

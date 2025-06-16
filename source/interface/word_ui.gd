@@ -17,14 +17,14 @@ func add_score(score: int, coord: Vector2) -> void:
 	Global.main.current.add_child(instance)
 
 	# Effect on score when receiving points.
-	var tween := get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_callback(func() -> void: _score.pivot_offset = _score.size / 2)
 	tween.tween_property(_score, ^"scale", Vector2.ONE * 1.5, 0.1)
 	tween.tween_property(_score, ^"scale", Vector2.ONE, 0.1)
 
 func refresh_power_up_panel(enable: bool) -> void:
 	# Effect on the power up panel when receiving or losing power.
-	var tween := get_tree().create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_callback(func() -> void: _power_up_panel.frame = int(enable))
 	tween.tween_property(_power_up_panel, ^"scale", Vector2.ONE * 1.5, 0.1)
 	tween.tween_property(_power_up_panel, ^"scale", Vector2.ONE, 0.1)

@@ -50,7 +50,7 @@ func _on_dead_state_entered() -> void:
 
 	await get_tree().create_timer(_DEAD_TIME).timeout
 	
-	var tween := get_tree().create_tween()
+	var tween := create_tween()
 	tween.tween_property(self, ^"modulate:a", 0, _DEAD_FADE_TIME)
 	tween.tween_callback(self.queue_free)
 

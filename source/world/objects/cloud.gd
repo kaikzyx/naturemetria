@@ -24,7 +24,7 @@ func hit() -> void:
 		get_parent().call_deferred(&"add_child", star)
 
 	# Animates the hit effect.
-	var tween := get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+	var tween := create_tween().set_trans(Tween.TRANS_SINE)
 	tween.tween_property(_animated_sprite, ^"position:y", -8, _TWEEN_TIME).as_relative().set_ease(Tween.EASE_OUT)
 	tween.tween_property(_animated_sprite, ^"position:y", 8, _TWEEN_TIME).as_relative().set_ease(Tween.EASE_IN)
 
