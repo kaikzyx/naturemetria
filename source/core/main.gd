@@ -8,7 +8,7 @@ const _INTERVAL_TRANSITION_TIME := 0.5
 func _ready() -> void:
 	Global.main = self
 
-func change_scene(scene: PackedScene) -> void:
+func change_scene(scene: PackedScene, interval: float = _INTERVAL_TRANSITION_TIME) -> void:
 	if not is_instance_valid(current): return
 
 	get_tree().paused = true
@@ -20,7 +20,7 @@ func change_scene(scene: PackedScene) -> void:
 	current.queue_free()
 	current = instance
 
-	await get_tree().create_timer(_INTERVAL_TRANSITION_TIME).timeout
+	await get_tree().create_timer(interval).timeout
 
 	get_tree().paused = false
 	_transition_animation.play(&"fade_in")
