@@ -38,13 +38,11 @@ script = ExtResource("1_ud04h")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_cb1hn")
 animation = &"fly"
 flip_h = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_ukkp1")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]

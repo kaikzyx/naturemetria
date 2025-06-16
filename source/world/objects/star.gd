@@ -18,3 +18,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y += ProjectSettings.get_setting(&"physics/2d/default_gravity") * delta
 
 	move_and_slide()
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.consume()
+		queue_free()

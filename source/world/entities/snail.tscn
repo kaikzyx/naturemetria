@@ -48,16 +48,14 @@ script = ExtResource("1_6j73w")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_2rht6")
 animation = &"patrol"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6.5)
+position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_6j73w")
 
 [node name="RayCasts" type="Node2D" parent="."]
-position = Vector2(0, -8)
 
 [node name="WallDetector" type="RayCast2D" parent="RayCasts"]
 position = Vector2(5, 0)

@@ -1,16 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dr6glxq3vb3j6"]
+[gd_scene load_steps=6 format=3 uid="uid://dr6glxq3vb3j6"]
 
 [ext_resource type="Texture2D" uid="uid://cc2ciga67b0ay" path="res://assets/images/map/backgrounds/background_1.png" id="1_hce5v"]
 [ext_resource type="Texture2D" uid="uid://dbxym2nd0nw1x" path="res://assets/images/map/backgrounds/background_2.png" id="2_l0j7f"]
 [ext_resource type="Texture2D" uid="uid://6465iv60eelw" path="res://assets/images/map/backgrounds/background_3.png" id="3_lks5m"]
 [ext_resource type="Texture2D" uid="uid://b70lil3my273w" path="res://assets/images/map/backgrounds/background_4.png" id="4_8twro"]
-[ext_resource type="Script" uid="uid://6k3qy281jvia" path="res://source/world/objects/fractal_tree.gd" id="5_aco22"]
 [ext_resource type="PackedScene" uid="uid://doyos62qoh1lm" path="res://source/world/levels/level_tile_map.tscn" id="6_lks5m"]
-[ext_resource type="PackedScene" uid="uid://c158y0p1pg5lx" path="res://source/world/objects/cloud.tscn" id="7_7l1od"]
-[ext_resource type="PackedScene" uid="uid://vuhaw14rmwsy" path="res://source/world/entities/snail.tscn" id="8_7ij3s"]
-[ext_resource type="PackedScene" uid="uid://b84l55jia625v" path="res://source/world/entities/crab.tscn" id="10_lks5m"]
-[ext_resource type="PackedScene" uid="uid://do6m7b2impyn7" path="res://source/world/entities/hummingbird.tscn" id="11_8twro"]
-[ext_resource type="PackedScene" uid="uid://jydu0ge2m6un" path="res://source/world/objects/life_flower.tscn" id="11_aco22"]
 
 [node name="Level" type="Node2D"]
 
@@ -48,38 +42,4 @@ repeat_size = Vector2(320, 0)
 texture = ExtResource("4_8twro")
 centered = false
 
-[node name="FractalTree" type="Node2D" parent="."]
-texture_filter = 1
-position = Vector2(160, 120)
-script = ExtResource("5_aco22")
-metadata/_custom_type_script = "uid://6k3qy281jvia"
-
 [node name="LevelTileMap" parent="." instance=ExtResource("6_lks5m")]
-
-[node name="Cloud1" parent="." instance=ExtResource("7_7l1od")]
-position = Vector2(496, 81)
-
-[node name="Cloud2" parent="." instance=ExtResource("7_7l1od")]
-position = Vector2(512, 81)
-has_star = true
-
-[node name="Cloud3" parent="." instance=ExtResource("7_7l1od")]
-position = Vector2(528, 81)
-
-[node name="Snail1" parent="." instance=ExtResource("8_7ij3s")]
-position = Vector2(224, 128)
-
-[node name="Snail2" parent="." instance=ExtResource("8_7ij3s")]
-position = Vector2(288, 128)
-
-[node name="Crab1" parent="." instance=ExtResource("10_lks5m")]
-position = Vector2(624, 96)
-
-[node name="Crab2" parent="." instance=ExtResource("10_lks5m")]
-position = Vector2(672, 96)
-
-[node name="Hummingbird" parent="." instance=ExtResource("11_8twro")]
-position = Vector2(464, 112)
-
-[node name="LifeFlower" parent="." instance=ExtResource("11_aco22")]
-position = Vector2(896, 32)

@@ -48,16 +48,13 @@ script = ExtResource("1_katqa")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_iwjkb")
 animation = &"patrol"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_iinyl")
 
 [node name="RayCasts" type="Node2D" parent="."]
-position = Vector2(0, -8)
 
 [node name="WallDetector" type="RayCast2D" parent="RayCasts"]
 position = Vector2(5, 0)

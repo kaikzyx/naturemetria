@@ -263,7 +263,6 @@ radius = 6.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 9
 script = ExtResource("1_xim07")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
@@ -279,7 +278,7 @@ shape = SubResource("CapsuleShape2D_xim07")
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(0, -11)
 collision_layer = 0
-collision_mask = 28
+collision_mask = 12
 
 [node name="Collision" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 0.5)
@@ -336,7 +335,6 @@ metadata/_custom_type_script = "uid://t3w6cos70bby"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="body_entered" from="WaterDetector" to="." method="_on_water_detector_body_entered"]
 [connection signal="body_exited" from="WaterDetector" to="." method="_on_water_detector_body_exited"]
 [connection signal="state_changed" from="StateMachine" to="." method="_on_state_machine_state_changed"]

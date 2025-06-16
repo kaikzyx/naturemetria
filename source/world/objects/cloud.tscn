@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c158y0p1pg5lx"]
+[gd_scene load_steps=14 format=3 uid="uid://dj70s3l3jl16c"]
 
 [ext_resource type="Texture2D" uid="uid://djtwjtcev5540" path="res://assets/images/objects/cloud.png" id="1_cw5ly"]
 [ext_resource type="Script" uid="uid://bh8ivoasfyk72" path="res://source/world/objects/cloud.gd" id="1_pkah4"]
@@ -88,15 +88,17 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_2o876")
 animation = &"light"
 autoplay = "heavy"
-frame_progress = 0.193447
+frame_progress = 0.433855
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cw5ly")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
 
 [node name="Collision" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_pkah4")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

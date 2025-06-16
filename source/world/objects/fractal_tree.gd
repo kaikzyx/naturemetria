@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 		queue_redraw()
 
 func _draw() -> void:
-	_draw_branch(Vector2.ZERO, initial_length, -90.0, depth_max, thickness_start)
+	_draw_branch(Vector2(0.0, 8.0), initial_length, -90.0, depth_max, thickness_start)
 
 func _draw_branch(start: Vector2, length: float, angle_deg: float, depth: int, thickness: float) -> void:
 	if depth == 0: return
