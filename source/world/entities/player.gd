@@ -39,6 +39,21 @@ func consume() -> void:
 	state_machine.request_state(&"transform")
 	consumed.emit()
 
+func _smoke_effect() -> void:
+	var effect := preload("res://source/world/effects/smoke_effect.tscn").instantiate()
+	effect.global_position = global_position
+	Global.main.current.add_child(effect)
+
+func _splash_effect() -> void:
+	var effect := preload("res://source/world/effects/splash_effect.tscn").instantiate()
+	effect.global_position = global_position - Vector2(0, 8)
+	Global.main.current.add_child(effect)
+
+func _kick_effect() -> void:
+	var effect := preload("res://source/world/effects/kick_effect.tscn").instantiate()
+	effect.global_position = global_position
+	Global.main.current.add_child(effect)
+
 func _get_horizontal_direction() -> int:
 	return Input.get_axis(&"move_left", &"move_right") as int
 
@@ -64,14 +79,17 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 			velocity.y = -_KNOCKBACK_FORCE
 			body.kill()
 			killed.emit()
+			_kick_effect()
 		else:
 			damage()
 
 func _on_water_detector_body_entered(_body: Node2D) -> void:
 	state_machine.request_state(&"swin_idle")
+	_splash_effect()
 
 func _on_water_detector_body_exited(_body: Node2D) -> void:
 	state_machine.request_state(&"jump")
+	_splash_effect()
 
 #region State machine callbacks.
 
@@ -90,6 +108,7 @@ func _on_idle_physics_updated(delta: float) -> void:
 
 func _on_run_state_entered() -> void:
 	_animated_sprite.play(&"super_run" if is_super else &"small_run")
+	_smoke_effect()
 
 func _on_run_physics_updated(delta: float) -> void:
 	_platform_movement(delta)
@@ -101,6 +120,7 @@ func _on_run_physics_updated(delta: float) -> void:
 func _on_jump_state_entered() -> void:
 	_animated_sprite.play(&"super_jump" if is_super else &"small_jump")
 	velocity.y = -_JUMP_FORCE
+	_smoke_effect()
 
 func _on_jump_state_physics_updated(delta: float) -> void:
 	_platform_movement(delta)
@@ -149,6 +169,13 @@ func _on_transform_state_entered() -> void:
 	get_tree().paused = false
 	process_mode = Node.PROCESS_MODE_INHERIT
 	state_machine.request_state(&"idle")
+
+	if not is_super:
+		var tweem := create_tween().set_loops(25)
+		tweem.tween_interval(0.05)
+		tweem.tween_callback(_animated_sprite.set_modulate.bind(Color.TRANSPARENT))
+		tweem.tween_interval(0.05)
+		tweem.tween_callback(_animated_sprite.set_modulate.bind(Color.WHITE))
 
 func _on_dead_freeze_state_entered() -> void:
 	get_tree().paused = true

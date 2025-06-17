@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvmpyamlqy3x3"]
+
+[ext_resource type="Texture2D" uid="uid://dk4bomqj14ifb" path="res://assets/images/map/effects.png" id="1_kh0hd"]
+[ext_resource type="Script" uid="uid://qog00u04msnq" path="res://source/world/effects/effect.gd" id="1_muamn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdy31"]
+atlas = ExtResource("1_kh0hd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ts2oy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdy31")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="KickEffect" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ts2oy")
+autoplay = "default"
+frame_progress = 1.0
+script = ExtResource("1_muamn")
+metadata/_custom_type_script = "uid://qog00u04msnq"

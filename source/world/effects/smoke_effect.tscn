@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://s4xhvib3i6f6"]
+
+[ext_resource type="Script" uid="uid://qog00u04msnq" path="res://source/world/effects/effect.gd" id="1_ha6de"]
+[ext_resource type="Texture2D" uid="uid://dk4bomqj14ifb" path="res://assets/images/map/effects.png" id="1_w28d8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owf1r"]
+atlas = ExtResource("1_w28d8")
+region = Rect2(0, 0, 8, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kykru"]
+atlas = ExtResource("1_w28d8")
+region = Rect2(8, 0, 8, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cs658"]
+atlas = ExtResource("1_w28d8")
+region = Rect2(16, 0, 8, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnikt"]
+atlas = ExtResource("1_w28d8")
+region = Rect2(24, 0, 8, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uiuck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owf1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kykru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cs658")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnikt")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="SmokeEffect" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_uiuck")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+script = ExtResource("1_ha6de")
+metadata/_custom_type_script = "uid://qog00u04msnq"

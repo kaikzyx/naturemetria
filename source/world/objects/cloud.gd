@@ -31,3 +31,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		var tween := create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property(_animated_sprite, ^"position:y", -8, _TWEEN_TIME).as_relative().set_ease(Tween.EASE_OUT)
 		tween.tween_property(_animated_sprite, ^"position:y", 8, _TWEEN_TIME).as_relative().set_ease(Tween.EASE_IN)
+
+		var effect := preload("res://source/world/effects/cloud_effect.tscn").instantiate()
+		effect.global_position = global_position + Vector2(0, 8)
+		Global.main.current.add_child(effect)

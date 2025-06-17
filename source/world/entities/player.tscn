@@ -286,7 +286,7 @@ shape = SubResource("RectangleShape2D_xim07")
 
 [node name="WaterDetector" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 32
+collision_mask = 8
 
 [node name="Collision" type="CollisionShape2D" parent="WaterDetector"]
 position = Vector2(0, -10)

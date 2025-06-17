@@ -5,7 +5,6 @@ extends CanvasLayer
 @onready var _start_label: Label = $StartLabel
 
 const _PARALLAX_SCROLL_SPEED := 500.0
-const _PARALLAX_SCROLL_DAMPING := 5.0
 const _3D_EFFECT_MAX_ROTATION := 30.0
 const _3D_EFFECT_RETURN_DAMPING := 10.0
 
@@ -33,11 +32,10 @@ func _process(delta: float) -> void:
 	_logo.material.set_shader_parameter("x_rot", new_x_rot)
 
 	# Make parallax move in mouse direction.
-	var scroll: float = sign(center.x - mouse.x) * _PARALLAX_SCROLL_SPEED
 	for child in _parallax.get_children():
 		if child is Parallax2D:
-			var goal: float = scroll * child.scroll_scale.x
-			child.autoscroll.x = lerp(child.autoscroll.x, goal, _PARALLAX_SCROLL_DAMPING * delta)
+			if child.scroll_scale.x == 0: continue
+			child.autoscroll.x = _PARALLAX_SCROLL_SPEED * child.scroll_scale.x
 
 	# Start the game.
 	if Input.is_action_just_pressed(&"start_game"):

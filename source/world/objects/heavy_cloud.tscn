@@ -7,4 +7,4 @@ has_star = true
 
 [node name="AnimatedSprite" parent="." index="0"]
 animation = &"heavy"
-frame_progress = 0.448563
+frame_progress = 0.212944

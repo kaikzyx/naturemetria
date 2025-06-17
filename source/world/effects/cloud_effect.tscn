@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnsuqjxu163n3"]
+
+[ext_resource type="Script" uid="uid://qog00u04msnq" path="res://source/world/effects/effect.gd" id="1_3bb2p"]
+[ext_resource type="Texture2D" uid="uid://dk4bomqj14ifb" path="res://assets/images/map/effects.png" id="1_mbxgl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbxgl"]
+atlas = ExtResource("1_mbxgl")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8h61"]
+atlas = ExtResource("1_mbxgl")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2dud"]
+atlas = ExtResource("1_mbxgl")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frux6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbxgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8h61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2dud")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CloudEffect" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_frux6")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
+script = ExtResource("1_3bb2p")
+metadata/_custom_type_script = "uid://qog00u04msnq"
