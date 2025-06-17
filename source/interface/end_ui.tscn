@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2v6edg4o2hio"]
+
+[ext_resource type="Script" uid="uid://hvh46guel3kh" path="res://source/interface/end_ui.gd" id="1_k57ac"]
+[ext_resource type="Theme" uid="uid://cya1kfy1ki3f4" path="res://assets/resources/theme.tres" id="2_k57ac"]
+
+[node name="EndUi" type="CanvasLayer" groups=["interface"]]
+script = ExtResource("1_k57ac")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="RichTextLabel" parent="Background"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_k57ac")
+bbcode_enabled = true
+text = "Parabéns! Você encontrou a [wave][rainbow]Flor da Vida[/rainbow][/wave]. Pena que ainda falta encontrar sua turma :(
+
+[color=yellow]Obrigado(a) por jogar![/color]"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1

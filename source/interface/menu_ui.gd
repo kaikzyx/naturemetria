@@ -39,4 +39,6 @@ func _process(delta: float) -> void:
 
 	# Start the game.
 	if Input.is_action_just_pressed(&"start_game"):
-		Global.main.change_scene(load("res://source/world/world.tscn"), 1.5)
+		get_tree().paused = true
+		await get_tree().create_timer(0.5).timeout
+		Global.main.change_scene(&"interface/intro_ui", Main.Transition.DIAMOND, 1.5)

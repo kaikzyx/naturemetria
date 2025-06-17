@@ -11,4 +11,4 @@ func _on_body_entered(body: Node2D) -> void:
 
 		var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 		tween.tween_interval(1)
-		tween.tween_callback(Global.main.change_scene.bind(preload("res://source/interface/menu_ui.tscn"), 1.5))
+		tween.tween_callback(Global.main.change_scene.bind(&"interface/end_ui", Main.Transition.FADE, 1.5))

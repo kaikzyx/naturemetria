@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://drff25truloty"]
+
+[ext_resource type="Script" uid="uid://bxg7gw6n5jyx7" path="res://source/interface/intro_ui.gd" id="1_serw6"]
+[ext_resource type="Theme" uid="uid://cya1kfy1ki3f4" path="res://assets/resources/theme.tres" id="2_serw6"]
+
+[node name="IntroUI" type="CanvasLayer" groups=["interface"]]
+script = ExtResource("1_serw6")
+metadata/_edit_horizontal_guides_ = [180.0]
+metadata/_edit_vertical_guides_ = [320.0]
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="RichTextLabel" parent="Background"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_serw6")
+bbcode_enabled = true
+text = "Você é um aluno do [color=lime]Adauto Bezerra[/color] que foi para uma aula de campo com o objetivo de encontrar a [wave][rainbow]Flor da Vida[/rainbow][/wave]. Porém, acabou se perdendo da turma, e agora tem que encontrar a flor sozinho.
+
+[color=yellow]Boa sorte.[/color]"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -9,7 +9,7 @@ func _on_main_ready(main: Main) -> void:
 	main.interface.add_child(_word_ui)
 
 func _on_player_died() -> void:
-	Global.main.change_scene(preload("res://source/world/world.tscn"))
+	Global.main.change_scene(&"world/world", Main.Transition.CIRCLE)
 
 func _on_player_transformed(status: bool) -> void:
 	if is_instance_valid(_word_ui):

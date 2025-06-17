@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf1inw5yt8fhn"]
+
+[ext_resource type="Script" uid="uid://dy3i6kjfwoji2" path="res://source/interface/credits_ui.gd" id="1_se51l"]
+[ext_resource type="Theme" uid="uid://cya1kfy1ki3f4" path="res://assets/resources/theme.tres" id="2_1yg8q"]
+
+[node name="CreditsUI" type="CanvasLayer" groups=["interface"]]
+script = ExtResource("1_se51l")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CreditsLabel" type="RichTextLabel" parent="Background"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1yg8q")
+bbcode_enabled = true
+text = "[color=yellow]DIRETOR DE ARTE[/color]
+Kaique Pereira da Silva N°18
+
+
+[color=yellow]DIRETOR DE PROGRAMAÇÃO[/color]
+Kaique Pereira da Silva N°18
+
+
+[color=yellow]DIRETOR SONORO[/color]
+João Miguel Ferreira Marques N°17
+
+
+[color=yellow]ROTEIRISTA[/color]
+Pedro Miguel Marques Beltri Quintanilla N°32
+
+
+[color=yellow]RESPONSÁVEL PELA COLETA DOS OBJETOS E DECORAÇÔES[/color]
+Eloah Mabelle Valdevino Rabelo N°10
+
+
+[color=yellow]APRESENTADORES DO JOGO[/color]
+João Miguel Ferreira Marques N°17
+João Eduardo Brasil Mendes de Lima N°15
+Rakely Julião de Moura N°33"
+scroll_active = false
+autowrap_mode = 2
+vertical_alignment = 1
