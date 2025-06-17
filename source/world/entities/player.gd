@@ -7,21 +7,34 @@ signal consumed()
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite
+@onready var _animation: AnimationPlayer = $Animation
+@onready var _ground_detector: Area2D = $GroundDetector
 
 const _SPEED := 100.0
 const _SPEED_DAMPING := 10.0
-const _JUMP_FORCE := 250.0
+const _JUMP_FORCE := 300.0
+const _JUMP_BRAKE_FACTOR := 0.5
+const _JUMP_HANG_THRESHOLD := 32.0
+const _JUMP_HANG_GRAVITY_FACTOR := 0.5
 const _KNOCKBACK_FORCE := 250.0
 const _DEAD_FREEZE_TIME := 0.5
 const _DEAD_INTERVAL_TIME := 0.25
 const _DEAD_KNOCKBACK := 250.0
 const _DEAD_GRAVITY_FORCE := 500.0
+const _COYOTE_TIME := 0.25
+const _JUMP_BUFFER_TIME := 0.1
+var _coyote_clock := 0.0
+var _jump_buffer_clock := 0.0
 var direction := 1
 var is_super := false
 
 func _ready() -> void:
 	Global.player = self
 	state_machine.start()
+
+func _process(delta: float) -> void:
+	_coyote_clock -= delta
+	_jump_buffer_clock -= delta
 
 func _physics_process(_delta: float) -> void:
 	# Change the sprite direction.
@@ -65,8 +78,18 @@ func _platform_movement(delta: float) -> void:
 	velocity.x = lerp(velocity.x, movement * _SPEED, _SPEED_DAMPING * delta)
 	if movement != 0: direction = movement
 
-	if not is_on_floor():
-		velocity.y += ProjectSettings.get_setting(&"physics/2d/default_gravity") * delta
+	if Input.is_action_just_pressed(&"jump"):
+		_jump_buffer_clock = _JUMP_BUFFER_TIME
+
+	if is_on_floor():
+		_coyote_clock = _COYOTE_TIME
+	else:
+		var gravity := ProjectSettings.get_setting(&"physics/2d/default_gravity") as float
+		if abs(velocity.y) <= _JUMP_HANG_THRESHOLD: gravity *= _JUMP_HANG_GRAVITY_FACTOR
+		velocity.y += gravity * delta
+
+func _can_jump() -> bool:
+	return _coyote_clock > 0 and _jump_buffer_clock > 0
 
 func _top_down_movement(delta: float) -> void:
 	var movement := Vector2(_get_horizontal_direction(), _get_vertical_direction()).normalized()
@@ -82,6 +105,11 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 			_kick_effect()
 		else:
 			damage()
+
+func _on_ground_detector_body_entered(_body: Node2D) -> void:
+	if _ground_detector.get_overlapping_bodies().size() == 1:
+		_animation.play(&"squash")
+		_smoke_effect()
 
 func _on_water_detector_body_entered(_body: Node2D) -> void:
 	state_machine.request_state(&"swin_idle")
@@ -100,7 +128,7 @@ func _on_idle_physics_updated(delta: float) -> void:
 	_platform_movement(delta)
 
 	if _get_horizontal_direction() != 0: state_machine.request_state(&"run")
-	if is_on_floor() and Input.is_action_just_pressed(&"jump"): state_machine.request_state(&"jump")
+	if _can_jump(): state_machine.request_state(&"jump")
 	if velocity.y > 0: state_machine.request_state(&"fall")
 
 func _on_run_state_entered() -> void:
@@ -111,17 +139,22 @@ func _on_run_physics_updated(delta: float) -> void:
 	_platform_movement(delta)
 
 	if _get_horizontal_direction() == 0: state_machine.request_state(&"idle")
-	if is_on_floor() and Input.is_action_just_pressed(&"jump"): state_machine.request_state(&"jump")
+	if _can_jump(): state_machine.request_state(&"jump")
 	if velocity.y > 0: state_machine.request_state(&"fall")
 
 func _on_jump_state_entered() -> void:
-	_animated_sprite.play(&"super_jump" if is_super else &"small_jump")
 	velocity.y = -_JUMP_FORCE
+	if not Input.is_action_pressed(&"jump"): velocity.y *= _JUMP_BRAKE_FACTOR
+	_coyote_clock = 0.0
+	_jump_buffer_clock = 0.0
+	_animated_sprite.play(&"super_jump" if is_super else &"small_jump")
+	_animation.play(&"stretch")
 	_smoke_effect()
 
 func _on_jump_state_physics_updated(delta: float) -> void:
 	_platform_movement(delta)
 
+	if Input.is_action_just_released(&"jump"): velocity.y *= _JUMP_BRAKE_FACTOR
 	if velocity.y > 0: state_machine.request_state(&"fall")
 
 func _on_fall_state_entered() -> void:
@@ -131,6 +164,7 @@ func _on_fall_state_physics_updated(delta: float) -> void:
 	_platform_movement(delta)
 
 	if is_on_floor(): state_machine.request_state(&"idle" if _get_horizontal_direction() == 0 else &"run")
+	if _can_jump(): state_machine.request_state(&"jump")
 
 func _on_swin_idle_state_entered() -> void:
 	_animated_sprite.play(&"super_swin_idle" if is_super else &"small_swin_idle")

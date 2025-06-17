@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dk0bqnu20mg2a"]
+[gd_scene load_steps=36 format=3 uid="uid://dk0bqnu20mg2a"]
 
 [ext_resource type="Texture2D" uid="uid://evn4p5by1ap8" path="res://assets/images/entities/player.png" id="1_jct2x"]
 [ext_resource type="Script" uid="uid://r1srmflo6cgp" path="res://source/world/entities/player.gd" id="1_xim07"]
@@ -258,8 +258,73 @@ height = 20.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xim07"]
 size = Vector2(12, 21)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tcuc"]
+size = Vector2(12, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_glqx2"]
 radius = 6.0
+
+[sub_resource type="Animation" id="Animation_3tcuc"]
+resource_name = "squash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.2, 2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 0.75), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.2, 2, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(0, -12), Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_42p1r"]
+resource_name = "stretch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.2, 2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.75, 1.25), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.2, 2, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(0, -20), Vector2(0, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sw377"]
+_data = {
+&"squash": SubResource("Animation_3tcuc"),
+&"stretch": SubResource("Animation_42p1r")
+}
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -283,6 +348,13 @@ collision_mask = 12
 [node name="Collision" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_xim07")
+
+[node name="GroundDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="Collision" type="CollisionShape2D" parent="GroundDetector"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_3tcuc")
 
 [node name="WaterDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -333,8 +405,13 @@ metadata/_custom_type_script = "uid://t3w6cos70bby"
 script = ExtResource("4_favdl")
 metadata/_custom_type_script = "uid://t3w6cos70bby"
 
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sw377")
+}
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="GroundDetector" to="." method="_on_ground_detector_body_entered"]
 [connection signal="body_entered" from="WaterDetector" to="." method="_on_water_detector_body_entered"]
 [connection signal="body_exited" from="WaterDetector" to="." method="_on_water_detector_body_exited"]
 [connection signal="entered" from="StateMachine/IdleState" to="." method="_on_idle_state_entered"]
