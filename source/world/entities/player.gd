@@ -93,9 +93,6 @@ func _on_water_detector_body_exited(_body: Node2D) -> void:
 
 #region State machine callbacks.
 
-func _onstate_machine_state_changed(_from: State, to: State) -> void:
-	print(&"Player state changed to: " + to.get_state_name())
-
 func _on_idle_state_entered() -> void:
 	_animated_sprite.play(&"super_idle" if is_super else &"small_idle")
 

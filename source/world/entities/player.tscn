@@ -337,7 +337,6 @@ metadata/_custom_type_script = "uid://t3w6cos70bby"
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="WaterDetector" to="." method="_on_water_detector_body_entered"]
 [connection signal="body_exited" from="WaterDetector" to="." method="_on_water_detector_body_exited"]
-[connection signal="state_changed" from="StateMachine" to="." method="_on_state_machine_state_changed"]
 [connection signal="entered" from="StateMachine/IdleState" to="." method="_on_idle_state_entered"]
 [connection signal="physics_updated" from="StateMachine/IdleState" to="." method="_on_idle_physics_updated"]
 [connection signal="entered" from="StateMachine/RunState" to="." method="_on_run_state_entered"]
