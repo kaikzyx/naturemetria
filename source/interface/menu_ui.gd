@@ -9,6 +9,8 @@ const _3D_EFFECT_MAX_ROTATION := 30.0
 const _3D_EFFECT_RETURN_DAMPING := 10.0
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 	# Start label pulse effect.
 	var tween := create_tween().set_loops()
 	tween.tween_property(_start_label, ^"modulate:a", 0.0, 0)
@@ -40,7 +42,8 @@ func _process(delta: float) -> void:
 			child.autoscroll.x = _PARALLAX_SCROLL_SPEED * child.scroll_scale.x
 
 	# Start the game.
-	if Input.is_action_just_pressed(&"resume"):
+	if Input.is_action_just_pressed(&"start_game"):
 		get_tree().paused = true
 		await get_tree().create_timer(0.5).timeout
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		Global.main.change_scene(&"interface/intro_ui", Main.Transition.DIAMOND, 1.5)
