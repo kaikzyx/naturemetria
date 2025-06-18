@@ -25,8 +25,8 @@ func _on_player_transformed(status: bool) -> void:
 
 func _on_player_killed() -> void:
 	if is_instance_valid(_word_ui):
-		_word_ui.add_score(100, Global.player.global_position + _KILLED_SCORE_LABEL_OFFSET)
+		_word_ui.next_score(Global.player.global_position + _KILLED_SCORE_LABEL_OFFSET)
 
 func _on_player_consumed() -> void:
 	if is_instance_valid(_word_ui):
-		_word_ui.add_score(250, Global.player.global_position + _CONSUMED_SCORE_LABEL_OFFSET)
+		_word_ui.next_score(Global.player.global_position + _CONSUMED_SCORE_LABEL_OFFSET)

@@ -49,7 +49,8 @@ func damage() -> void:
 		state_machine.request_state(&"dead_freeze")
 
 func consume() -> void:
-	state_machine.request_state(&"transform")
+	if not is_super:
+		state_machine.request_state(&"transform")
 	consumed.emit()
 
 func _smoke_effect() -> void:

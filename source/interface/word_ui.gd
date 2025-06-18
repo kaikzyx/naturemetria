@@ -4,15 +4,19 @@ class_name WordUI extends CanvasLayer
 @onready var _score_label: Label = $Score/ScoreLabel
 @onready var _power_up_panel: Sprite2D = $PowerUpPanel
 
-var _total_score := 0
+var _total_score := 1
+var _previous_score := 0
 
-func add_score(score: int, coord: Vector2) -> void:
-	_total_score += score
+func next_score(coord: Vector2) -> void:
+	var next := _previous_score + _total_score
+	_previous_score = _total_score
+	_total_score = next
+
 	_score_label.text = &"x " + str(_total_score)
 
 	# Creates a floating score for decoration.
 	var instance := preload("res://source/interface/score_effect_ui.tscn").instantiate() as Label
-	instance.text = &"+" + str(score)
+	instance.text = &"+" + str(_previous_score)
 	instance.global_position = coord
 	Global.main.current.add_child(instance)
 
@@ -21,6 +25,7 @@ func add_score(score: int, coord: Vector2) -> void:
 	tween.tween_callback(func() -> void: _score.pivot_offset = _score.size / 2)
 	tween.tween_property(_score, ^"scale", Vector2.ONE * 1.5, 0.1)
 	tween.tween_property(_score, ^"scale", Vector2.ONE, 0.1)
+
 
 func refresh_power_up_panel(enable: bool) -> void:
 	# Effect on the power up panel when receiving or losing power.
