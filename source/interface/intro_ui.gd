@@ -1,7 +1,8 @@
 extends CanvasLayer
 
-const _INTERVAL_TIME := 10.0
-
 func _ready() -> void:
-	await get_tree().create_timer(_INTERVAL_TIME).timeout
-	Global.main.change_scene(&"world/world", Main.Transition.DIAMOND, 1.5)
+	Global.main.music(preload("res://assets/sounds/main_theme.wav"))
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed(&"resume"):
+		Global.main.change_scene(&"world/world", Main.Transition.DIAMOND, 1.5)

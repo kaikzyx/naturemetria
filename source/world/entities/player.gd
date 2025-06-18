@@ -9,6 +9,7 @@ signal consumed()
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite
 @onready var _animation: AnimationPlayer = $Animation
 @onready var _ground_detector: Area2D = $GroundDetector
+@onready var _audio_stream: AudioStreamPlayer = $AudioStream
 
 const _SPEED := 100.0
 const _SPEED_DAMPING := 10.0
@@ -18,7 +19,6 @@ const _JUMP_HANG_THRESHOLD := 32.0
 const _JUMP_HANG_GRAVITY_FACTOR := 0.5
 const _KNOCKBACK_FORCE := 250.0
 const _DEAD_FREEZE_TIME := 0.5
-const _DEAD_INTERVAL_TIME := 0.25
 const _DEAD_KNOCKBACK := 250.0
 const _DEAD_GRAVITY_FORCE := 500.0
 const _COYOTE_TIME := 0.25
@@ -27,6 +27,7 @@ var _coyote_clock := 0.0
 var _jump_buffer_clock := 0.0
 var direction := 1
 var is_super := false
+var is_dead
 
 func _ready() -> void:
 	Global.player = self
@@ -50,8 +51,15 @@ func damage() -> void:
 
 func consume() -> void:
 	if not is_super:
+		_sound_effect(preload("res://assets/sounds/player_power_up_sound_effect.wav"))
 		state_machine.request_state(&"transform")
 	consumed.emit()
+
+func _sound_effect(audio: AudioStream) -> void:
+	_audio_stream.stream = audio
+	_audio_stream.play()
+	await _audio_stream.finished
+	_audio_stream.stream = null
 
 func _smoke_effect() -> void:
 	var effect := preload("res://source/world/effects/smoke_effect.tscn").instantiate()
@@ -64,6 +72,7 @@ func _splash_effect() -> void:
 	Global.main.current.add_child(effect)
 
 func _kick_effect() -> void:
+	_sound_effect(preload("res://assets/sounds/player_kick_sound_effect.wav"))
 	var effect := preload("res://source/world/effects/kick_effect.tscn").instantiate()
 	effect.global_position = global_position
 	Global.main.current.add_child(effect)
@@ -151,6 +160,7 @@ func _on_jump_state_entered() -> void:
 	_animated_sprite.play(&"super_jump" if is_super else &"small_jump")
 	_animation.play(&"stretch")
 	_smoke_effect()
+	_sound_effect(preload("res://assets/sounds/player_jump_sound_effect.wav"))
 
 func _on_jump_state_physics_updated(delta: float) -> void:
 	_platform_movement(delta)
@@ -220,6 +230,7 @@ func _on_dead_freeze_state_entered() -> void:
 	z_index = RenderingServer.CANVAS_ITEM_Z_MAX
 	_animated_sprite.play(&"dead")
 	_animated_sprite.pause()
+	_sound_effect(preload("res://assets/sounds/player_dead_sound_effect.wav"))
 
 	# Wait for the timer and the real state of death begins.
 	await get_tree().create_timer(_DEAD_FREEZE_TIME).timeout
@@ -234,9 +245,11 @@ func _on_dead_state_physics_updated(delta: float) -> void:
 
 	# Emit died signal when the player disappears from the screen.
 	if global_position.y > get_viewport_rect().size.y:
-		await get_tree().create_timer(_DEAD_INTERVAL_TIME).timeout
+		if not is_dead:
+			is_dead = true
 
-		died.emit()
-		queue_free()
+			await _audio_stream.finished
+			died.emit()
+			queue_free()
 
 #endregion

@@ -16,6 +16,8 @@ func _ready() -> void:
 	tween.tween_property(_start_label, ^"modulate:a", 1.0, 0)
 	tween.tween_interval(0.5)
 
+	Global.main.music(preload("res://assets/sounds/menu_theme.wav"))
+
 func _process(delta: float) -> void:
 	var mouse := get_viewport().get_mouse_position()
 
@@ -38,7 +40,7 @@ func _process(delta: float) -> void:
 			child.autoscroll.x = _PARALLAX_SCROLL_SPEED * child.scroll_scale.x
 
 	# Start the game.
-	if Input.is_action_just_pressed(&"start_game"):
+	if Input.is_action_just_pressed(&"resume"):
 		get_tree().paused = true
 		await get_tree().create_timer(0.5).timeout
 		Global.main.change_scene(&"interface/intro_ui", Main.Transition.DIAMOND, 1.5)

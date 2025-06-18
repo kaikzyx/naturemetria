@@ -1,7 +1,8 @@
 extends CanvasLayer
 
-const _INTERVAL_TIME := 7.5
-
 func _ready() -> void:
-	await get_tree().create_timer(_INTERVAL_TIME).timeout
-	Global.main.change_scene(&"interface/credits_ui", Main.Transition.FADE, 1.5)
+	Global.main.music(preload("res://assets/sounds/credits_theme.wav"))
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed(&"resume"):
+		Global.main.change_scene(&"interface/credits_ui", Main.Transition.FADE, 1.5)

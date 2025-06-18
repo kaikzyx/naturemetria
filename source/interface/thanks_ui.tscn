@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch0fmhldmit4u"]
+
+[ext_resource type="Script" uid="uid://b5o43ftwd082n" path="res://source/interface/thanks_ui.gd" id="1_nhc0s"]
+[ext_resource type="Theme" uid="uid://cya1kfy1ki3f4" path="res://assets/resources/theme.tres" id="2_hoyt4"]
+
+[node name="ThanksUI" type="CanvasLayer" groups=["interface"]]
+script = ExtResource("1_nhc0s")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="RichTextLabel" parent="Background"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hoyt4")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[wave][color=yellow]Obrigado por jogar![/color][/wave]"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -15,8 +15,9 @@ func next_score(coord: Vector2) -> void:
 	_score_label.text = &"x " + str(_total_score)
 
 	# Creates a floating score for decoration.
+	var difference := _total_score - _previous_score
 	var instance := preload("res://source/interface/score_effect_ui.tscn").instantiate() as Label
-	instance.text = &"+" + str(_previous_score)
+	instance.text = &"+" + str(1 if difference == 0 else difference)
 	instance.global_position = coord
 	Global.main.current.add_child(instance)
 
@@ -25,7 +26,6 @@ func next_score(coord: Vector2) -> void:
 	tween.tween_callback(func() -> void: _score.pivot_offset = _score.size / 2)
 	tween.tween_property(_score, ^"scale", Vector2.ONE * 1.5, 0.1)
 	tween.tween_property(_score, ^"scale", Vector2.ONE, 0.1)
-
 
 func refresh_power_up_panel(enable: bool) -> void:
 	# Effect on the power up panel when receiving or losing power.

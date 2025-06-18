@@ -16,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="RichTextLabel" parent="Background"]
+[node name="Text" type="RichTextLabel" parent="Background"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -27,10 +27,11 @@ offset_right = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_serw6")
+theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "Você é um aluno do [color=lime]Adauto Bezerra[/color] que foi para uma aula de campo com o objetivo de encontrar a [wave][rainbow]Flor da Vida[/rainbow][/wave]. Porém, acabou se perdendo da turma, e agora tem que encontrar a flor sozinho.
+text = "Você chegou na fase final do teste para se tornar monitor de laboratório do [color=lime]Colégio Adauto Bezerra[/color]. Sua missão é clara: encontrar a lendária e misteriosa [shake][rainbow]Flor da Vida[/rainbow][/shake]. Dizem que ela guarda os segredos da ciência, da criação e do conhecimento absoluto. Somente os verdadeiramente dignos conseguem encontrá-la. Prepare-se, enfrente os desafios que surgirem pelo caminho e mostre que você tem tudo para se tornar o novo guardião do laboratório. O destino está nas suas mãos...
 
-[color=yellow]Boa sorte.[/color]"
+[wave][color=yellow]Boa sorte, jogador(a).[/color][/wave]"
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1

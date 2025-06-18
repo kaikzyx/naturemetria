@@ -410,6 +410,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_sw377")
 }
 
+[node name="AudioStream" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="GroundDetector" to="." method="_on_ground_detector_body_entered"]
 [connection signal="body_entered" from="WaterDetector" to="." method="_on_water_detector_body_entered"]

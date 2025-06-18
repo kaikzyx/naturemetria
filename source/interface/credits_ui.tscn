@@ -26,29 +26,31 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_1yg8q")
 bbcode_enabled = true
-text = "[color=yellow]DIRETOR DE ARTE[/color]
+text = "[wave][color=yellow]PROGAMADOR[/color][/wave]
 Kaique Pereira da Silva N°18
 
 
-[color=yellow]DIRETOR DE PROGRAMAÇÃO[/color]
-Kaique Pereira da Silva N°18
-
-
-[color=yellow]DIRETOR SONORO[/color]
+[wave][color=yellow]ROTEIRO[/color][/wave]
 João Miguel Ferreira Marques N°17
-
-
-[color=yellow]ROTEIRISTA[/color]
+Kaique Pereira da Silva N°18
 Pedro Miguel Marques Beltri Quintanilla N°32
 
 
-[color=yellow]RESPONSÁVEL PELA COLETA DOS OBJETOS E DECORAÇÔES[/color]
+[wave][color=yellow]ARTE[/color][/wave]
+Kaique Pereira da Silva N°18
+
+
+[wave][color=yellow]MÚSICAS E EFEITOS SONOROS[/color][/wave]
+João Miguel Ferreira Marques N°17
+
+
+[wave][color=yellow]DECORAÇÂO[/color][/wave]
 Eloah Mabelle Valdevino Rabelo N°10
 
 
-[color=yellow]APRESENTADORES DO JOGO[/color]
-João Miguel Ferreira Marques N°17
+[wave][color=yellow]APRESENTAÇÂO[/color][/wave]
 João Eduardo Brasil Mendes de Lima N°15
+João Miguel Ferreira Marques N°17
 Rakely Julião de Moura N°33"
 scroll_active = false
 autowrap_mode = 2

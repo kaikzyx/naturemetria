@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://hvh46guel3kh" path="res://source/interface/end_ui.gd" id="1_k57ac"]
 [ext_resource type="Theme" uid="uid://cya1kfy1ki3f4" path="res://assets/resources/theme.tres" id="2_k57ac"]
 
-[node name="EndUi" type="CanvasLayer" groups=["interface"]]
+[node name="EndUI" type="CanvasLayer" groups=["interface"]]
 script = ExtResource("1_k57ac")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -26,9 +26,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_k57ac")
 bbcode_enabled = true
-text = "Parabéns! Você encontrou a [wave][rainbow]Flor da Vida[/rainbow][/wave]. Pena que ainda falta encontrar sua turma :(
+text = "[wave][color=yellow]Parabéns![/color][/wave] Você encontrou a [shake][rainbow]Flor da Vida[/rainbow][/shake], símbolo da busca pelo conhecimento e pela descoberta. Sua conquista mostra que você é alguém que valoriza a ciência, a curiosidade e o compromisso de cuidar e compartilhar saberes. A partir de agora, você se torna oficialmente monitor de laboratório, pronto para inspirar e transformar. Sua jornada só está começando.
 
-[color=yellow]Obrigado(a) por jogar![/color]"
+
+[wave][color=yellow]Até mais.[/color][/wave]"
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1

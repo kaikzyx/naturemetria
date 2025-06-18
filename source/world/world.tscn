@@ -99,7 +99,7 @@ centered = false
 [node name="LevelTileMap" parent="." instance=ExtResource("8_nyap0")]
 
 [node name="Player" parent="." instance=ExtResource("2_hv7nm")]
-position = Vector2(32, 96)
+position = Vector2(64, 96)
 
 [node name="LeafParticles" type="GPUParticles2D" parent="."]
 texture_filter = 1
