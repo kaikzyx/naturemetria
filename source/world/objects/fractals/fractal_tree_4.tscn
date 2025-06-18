@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8fwisj1o4mub"]
+
+[ext_resource type="PackedScene" uid="uid://cwcka23ap2ndt" path="res://source/world/objects/fractals/fractal_tree.tscn" id="1_7qya6"]
+[ext_resource type="Texture2D" uid="uid://ri5qnb4y8vqr" path="res://assets/images/map/fractals/fractal_tree_4.png" id="2_85hgm"]
+
+[node name="FractalTree4" instance=ExtResource("1_7qya6")]
+texture = ExtResource("2_85hgm")
+offset = Vector2(-38, -45)

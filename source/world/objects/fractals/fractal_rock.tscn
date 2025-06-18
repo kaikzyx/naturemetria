@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bwp4hnkmgv52e"]
+
+[node name="FractalRock" type="Sprite2D"]
+texture_filter = 1

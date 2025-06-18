@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwcka23ap2ndt"]
-
-[ext_resource type="Script" uid="uid://6k3qy281jvia" path="res://source/world/objects/fractal_tree.gd" id="1_vmot4"]
-
-[node name="FractalTree" type="Node2D"]
-texture_filter = 1
-script = ExtResource("1_vmot4")
-metadata/_custom_type_script = "uid://6k3qy281jvia"

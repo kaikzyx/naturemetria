@@ -1,22 +1,46 @@
-[gd_scene load_steps=22 format=4 uid="uid://doyos62qoh1lm"]
+[gd_scene load_steps=32 format=4 uid="uid://doyos62qoh1lm"]
 
+[ext_resource type="PackedScene" uid="uid://cwv3cw2llynbg" path="res://source/world/objects/fractals/fractal_tree_1.tscn" id="1_1bt54"]
 [ext_resource type="Texture2D" uid="uid://dgoorvc7mnk7n" path="res://assets/images/map/tile_set.png" id="1_5cuj4"]
+[ext_resource type="PackedScene" uid="uid://chsxohnhg7p4o" path="res://source/world/objects/fractals/fractal_rock_small.tscn" id="1_ecwkj"]
+[ext_resource type="PackedScene" uid="uid://bwp4hnkmgv52e" path="res://source/world/objects/fractals/fractal_rock.tscn" id="1_jdfiw"]
+[ext_resource type="PackedScene" uid="uid://dg6fa6be63fd1" path="res://source/world/objects/fractals/fractal_rock_big.tscn" id="2_6yrug"]
 [ext_resource type="PackedScene" uid="uid://vuhaw14rmwsy" path="res://source/world/entities/snail.tscn" id="2_cyqce"]
+[ext_resource type="PackedScene" uid="uid://du35oeiutl2eg" path="res://source/world/objects/fractals/fractal_tree_2.tscn" id="2_sget6"]
 [ext_resource type="Texture2D" uid="uid://dwhvgcnsoe83q" path="res://assets/images/map/water_tile_set.png" id="2_vm7iq"]
+[ext_resource type="PackedScene" uid="uid://c0ca4r3e4uflm" path="res://source/world/objects/fractals/fractal_tree_3.tscn" id="3_jdfiw"]
 [ext_resource type="PackedScene" uid="uid://do6m7b2impyn7" path="res://source/world/entities/hummingbird.tscn" id="3_kbggy"]
 [ext_resource type="PackedScene" uid="uid://gnowdj6tkrp0" path="res://source/world/objects/light_cloud.tscn" id="4_3si3t"]
+[ext_resource type="PackedScene" uid="uid://b8fwisj1o4mub" path="res://source/world/objects/fractals/fractal_tree_4.tscn" id="4_itt58"]
 [ext_resource type="PackedScene" uid="uid://b84l55jia625v" path="res://source/world/entities/crab.tscn" id="4_k1tem"]
 [ext_resource type="PackedScene" uid="uid://bnksteaim6p1l" path="res://source/world/objects/heavy_cloud.tscn" id="5_dl5dp"]
+[ext_resource type="PackedScene" uid="uid://cskxw3x44x8uy" path="res://source/world/objects/fractals/fractal_tree_5.tscn" id="5_sget6"]
 [ext_resource type="PackedScene" uid="uid://jydu0ge2m6un" path="res://source/world/objects/life_flower.tscn" id="6_k1tem"]
-[ext_resource type="PackedScene" uid="uid://cwcka23ap2ndt" path="res://source/world/objects/fractal_tree.tscn" id="7_dl5dp"]
 [ext_resource type="Texture2D" uid="uid://by1i4f6c1jee5" path="res://assets/images/map/decos.png" id="9_7t41f"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jdfiw"]
+resource_name = "Rocks"
+scenes/2/scene = ExtResource("1_ecwkj")
+scenes/3/scene = ExtResource("2_6yrug")
+
+[sub_resource type="TileSet" id="TileSet_itt58"]
+sources/0 = SubResource("TileSetScenesCollectionSource_jdfiw")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_sget6"]
+resource_name = "stones"
+scenes/1/scene = ExtResource("1_jdfiw")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_dl5dp"]
 resource_name = "trees"
-scenes/1/scene = ExtResource("7_dl5dp")
+scenes/1/scene = ExtResource("1_1bt54")
+scenes/2/scene = ExtResource("2_sget6")
+scenes/3/scene = ExtResource("3_jdfiw")
+scenes/4/scene = ExtResource("4_itt58")
+scenes/5/scene = ExtResource("5_sget6")
 
 [sub_resource type="TileSet" id="TileSet_7t41f"]
-sources/0 = SubResource("TileSetScenesCollectionSource_dl5dp")
+sources/1 = SubResource("TileSetScenesCollectionSource_dl5dp")
+sources/0 = SubResource("TileSetScenesCollectionSource_sget6")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_cyqce"]
 resource_name = "enemies"
@@ -168,8 +192,12 @@ sources/0 = SubResource("TileSetAtlasSource_kbggy")
 [node name="LevelTileMap" type="Node2D"]
 texture_filter = 1
 
-[node name="TreeLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAFAAcAAAAAAAAAAQA=")
+[node name="RockLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAEAAkAAAAAAAAAAwA2AAUAAAAAAAAAAwASAAcAAAAAAAAAAgAoAAUAAAAAAAAAAgA=")
+tile_set = SubResource("TileSet_itt58")
+
+[node name="TreesLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAJAAYAAQAAAAAAAQAkAAUAAQAAAAAABAADAAcAAQAAAAAABAAvAAUAAQAAAAAAAwAxAAUAAQAAAAAAAgA5AAUAAQAAAAAAAQAPAAcAAQAAAAAABQArAAUAAQAAAAAABQAUAAcAAQAAAAAAAgA=")
 tile_set = SubResource("TileSet_7t41f")
 
 [node name="ThingsLayer" type="TileMapLayer" parent="."]

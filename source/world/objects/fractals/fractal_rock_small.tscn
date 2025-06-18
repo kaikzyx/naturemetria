@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://chsxohnhg7p4o"]
+
+[ext_resource type="PackedScene" uid="uid://bwp4hnkmgv52e" path="res://source/world/objects/fractals/fractal_rock.tscn" id="1_iarnp"]
+[ext_resource type="Texture2D" uid="uid://dxk8kgubilas1" path="res://assets/images/map/fractals/fractal_rock_small.png" id="2_bakwl"]
+
+[node name="FractalRockSmall" instance=ExtResource("1_iarnp")]
+texture = ExtResource("2_bakwl")
+offset = Vector2(0, -18)
