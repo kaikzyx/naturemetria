@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://m8nymm8b83qa"]
 
 [ext_resource type="Script" uid="uid://dun5am35ac1be" path="res://source/core/main.gd" id="1_62cc7"]
-[ext_resource type="PackedScene" uid="uid://ckygt3yavk4rd" path="res://source/interface/menu_ui.tscn" id="2_gmyo2"]
+[ext_resource type="PackedScene" uid="uid://pkesl7igbgxs" path="res://source/world/world.tscn" id="2_gmyo2"]
 [ext_resource type="Shader" uid="uid://wxs361hjq10k" path="res://assets/shaders/diamond_transition.gdshader" id="3_rcgb3"]
 [ext_resource type="Shader" uid="uid://bsohstkem4vae" path="res://assets/shaders/circle_transition.gdshader" id="4_gmyo2"]
 

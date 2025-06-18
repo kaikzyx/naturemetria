@@ -1,26 +1,115 @@
-[gd_scene load_steps=6 format=3 uid="uid://pkesl7igbgxs"]
+[gd_scene load_steps=16 format=3 uid="uid://pkesl7igbgxs"]
 
 [ext_resource type="Script" uid="uid://dsulmggkuwghi" path="res://source/world/world.gd" id="1_geqj3"]
 [ext_resource type="Script" uid="uid://dltk7ixi5xdql" path="res://source/world/camera/camera.gd" id="1_ibvgw"]
 [ext_resource type="PackedScene" uid="uid://dk0bqnu20mg2a" path="res://source/world/entities/player.tscn" id="2_hv7nm"]
-[ext_resource type="PackedScene" uid="uid://dr6glxq3vb3j6" path="res://source/world/levels/level.tscn" id="3_pt5hk"]
+[ext_resource type="Texture2D" uid="uid://cc2ciga67b0ay" path="res://assets/images/map/backgrounds/background_1.png" id="3_1cxwb"]
+[ext_resource type="Texture2D" uid="uid://bxuoh37wiv4e4" path="res://assets/images/map/backgrounds/background_2.png" id="4_a3s12"]
+[ext_resource type="Texture2D" uid="uid://dbxym2nd0nw1x" path="res://assets/images/map/backgrounds/background_3.png" id="5_cf5jr"]
 [ext_resource type="PackedScene" uid="uid://cfxr57uuj8y5x" path="res://source/interface/word_ui.tscn" id="5_srwqi"]
+[ext_resource type="Texture2D" uid="uid://6465iv60eelw" path="res://assets/images/map/backgrounds/background_4.png" id="6_lv4ew"]
+[ext_resource type="Texture2D" uid="uid://b70lil3my273w" path="res://assets/images/map/backgrounds/background_5.png" id="7_nockn"]
+[ext_resource type="PackedScene" uid="uid://doyos62qoh1lm" path="res://source/world/level_tile_map.tscn" id="8_nyap0"]
+[ext_resource type="Texture2D" uid="uid://cy20s5ikiyiim" path="res://assets/images/map/leafs.png" id="10_4r8g4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4d0s3"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_8drok"]
+offsets = PackedFloat32Array(0, 0.2, 0.7, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yuk1q"]
+gradient = SubResource("Gradient_8drok")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e7xpt"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(320, 180, 1)
+spread = 20.0
+initial_velocity_min = 20.0
+initial_velocity_max = 80.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 50.0
+gravity = Vector3(0, 10, 0)
+scale_min = 0.5
+scale_max = 1.25
+color_ramp = SubResource("GradientTexture1D_yuk1q")
+anim_offset_max = 1.0
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_geqj3")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 limit_left = 0
-limit_right = 960
+limit_right = 5120
 limit_bottom = 180
 position_smoothing_speed = 3.0
 script = ExtResource("1_ibvgw")
 target = NodePath("../Player")
 
-[node name="Level" parent="." instance=ExtResource("3_pt5hk")]
+[node name="Parallax" type="Node2D" parent="."]
+texture_filter = 1
+
+[node name="1" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Parallax/1"]
+texture = ExtResource("3_1cxwb")
+centered = false
+
+[node name="2" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(320, 0)
+autoscroll = Vector2(10, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Parallax/2"]
+modulate = Color(1, 1, 1, 0.74902)
+texture = ExtResource("4_a3s12")
+centered = false
+
+[node name="3" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Parallax/3"]
+texture = ExtResource("5_cf5jr")
+centered = false
+
+[node name="4" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Parallax/4"]
+texture = ExtResource("6_lv4ew")
+centered = false
+
+[node name="5" type="Parallax2D" parent="Parallax"]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite" type="Sprite2D" parent="Parallax/5"]
+texture = ExtResource("7_nockn")
+centered = false
+
+[node name="LevelTileMap" parent="." instance=ExtResource("8_nyap0")]
 
 [node name="Player" parent="." instance=ExtResource("2_hv7nm")]
-position = Vector2(160, 112)
+position = Vector2(32, 96)
+
+[node name="LeafParticles" type="GPUParticles2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_4d0s3")
+position = Vector2(0, 1)
+amount = 35
+texture = ExtResource("10_4r8g4")
+lifetime = 5.0
+visibility_rect = Rect2(0, 0, 320, 180)
+process_material = SubResource("ParticleProcessMaterial_e7xpt")
 
 [node name="WordUI" parent="." instance=ExtResource("5_srwqi")]
 
