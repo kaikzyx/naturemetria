@@ -26,10 +26,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_k57ac")
 bbcode_enabled = true
-text = "[wave][color=yellow]Parabéns![/color][/wave] Você encontrou a [shake][rainbow]Flor da Vida[/rainbow][/shake], símbolo da busca pelo conhecimento e pela descoberta. Sua conquista mostra que você é alguém que valoriza a ciência, a curiosidade e o compromisso de cuidar e compartilhar saberes. A partir de agora, você se torna oficialmente monitor de laboratório, pronto para inspirar e transformar. Sua jornada só está começando.
+text = "[wave][color=yellow]Parabéns![/color][/wave] Você encontrou a [shake][rainbow]Flor da Vida[/rainbow][/shake], o emblema máximo da Geometria da Natureza e do poder transformador do conhecimento. Seu trabalho brilhou pela originalidade, rigor científico e sensibilidade estética — qualidades que inspiram tanto a comunidade docente quanto os colegas.
+
+A partir de agora, sua trajetória será marcada por prosperidade, novas descobertas e grandes realizações. Embora tenha se destacado na feira [color=lime]Integra Ciência[/color], este é apenas o início de uma jornada na qual você será exemplo de curiosidade, criatividade e compromisso com o saber.
 
 
-[wave][color=yellow]Até mais.[/color][/wave]"
+[wave][color=yellow]Até breve![/color][/wave]
+"
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1

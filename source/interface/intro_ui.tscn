@@ -22,16 +22,19 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
-offset_right = -64.0
+offset_left = 65.0
+offset_right = -63.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_serw6")
-theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "Você chegou na fase final do teste para se tornar monitor de laboratório do [color=lime]Colégio Adauto Bezerra[/color]. Sua missão é clara: encontrar a lendária e misteriosa [shake][rainbow]Flor da Vida[/rainbow][/shake]. Dizem que ela guarda os segredos da ciência, da criação e do conhecimento absoluto. Somente os verdadeiramente dignos conseguem encontrá-la. Prepare-se, enfrente os desafios que surgirem pelo caminho e mostre que você tem tudo para se tornar o novo guardião do laboratório. O destino está nas suas mãos...
+text = "Você chegou à fase final da competição para apresentar seu trabalho na feira [color=lime]Integra Ciência[/color], com o tema Geometria da Natureza. Sua missão é clara: descobrir a lendária e misteriosa [shake][rainbow]Flor da Vida[/rainbow][/shake], artefato que simboliza a perfeita harmonia dos padrões geométricos presentes em tudo ao nosso redor. Dizem que ela contém os segredos da ciência, da criação e do conhecimento absoluto.
 
-[wave][color=yellow]Boa sorte, jogador(a).[/color][/wave]"
+Somente os mais criativos e dedicados conseguem revelá-la. Preparem‑se, enfrentem juntos os desafios que surgirem pelo caminho e mostrem que têm tudo para conquistar o prêmio máximo da feira. O futuro da ciência está em suas mãos…
+
+
+[wave][color=yellow]Boa sorte, jogador(a)![/color][/wave]"
 autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
