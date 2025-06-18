@@ -7,12 +7,14 @@ signal consumed()
 
 @onready var state_machine: StateMachine = $StateMachine
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite
+@onready var _hitbox: Area2D = $Hitbox
 @onready var _animation: AnimationPlayer = $Animation
 @onready var _ground_detector: Area2D = $GroundDetector
 @onready var _audio_stream: AudioStreamPlayer = $AudioStream
 
 const _SPEED := 100.0
 const _SPEED_DAMPING := 10.0
+const _GRAVITY_MAX := 350.0
 const _JUMP_FORCE := 300.0
 const _JUMP_BRAKE_FACTOR := 0.5
 const _JUMP_HANG_THRESHOLD := 32.0
@@ -96,7 +98,7 @@ func _platform_movement(delta: float) -> void:
 	else:
 		var gravity := ProjectSettings.get_setting(&"physics/2d/default_gravity") as float
 		if abs(velocity.y) <= _JUMP_HANG_THRESHOLD: gravity *= _JUMP_HANG_GRAVITY_FACTOR
-		velocity.y += gravity * delta
+		velocity.y = minf(velocity.y + gravity * delta, _GRAVITY_MAX)
 
 func _can_jump() -> bool:
 	return _coyote_clock > 0 and _jump_buffer_clock > 0
@@ -213,11 +215,16 @@ func _on_transform_state_entered() -> void:
 	state_machine.request_state(&"idle")
 
 	if not is_super:
+		_hitbox.monitoring = false
+
 		var tweem := create_tween().set_loops(25)
 		tweem.tween_interval(0.05)
 		tweem.tween_callback(_animated_sprite.set_modulate.bind(Color.TRANSPARENT))
 		tweem.tween_interval(0.05)
 		tweem.tween_callback(_animated_sprite.set_modulate.bind(Color.WHITE))
+
+		await tweem.finished
+		_hitbox.monitoring = true
 
 func _on_dead_freeze_state_entered() -> void:
 	get_tree().paused = true
@@ -230,6 +237,7 @@ func _on_dead_freeze_state_entered() -> void:
 	z_index = RenderingServer.CANVAS_ITEM_Z_MAX
 	_animated_sprite.play(&"dead")
 	_animated_sprite.pause()
+	_animation.play(&"squash")
 	_sound_effect(preload("res://assets/sounds/player_dead_sound_effect.wav"))
 
 	# Wait for the timer and the real state of death begins.
@@ -238,6 +246,7 @@ func _on_dead_freeze_state_entered() -> void:
 
 func _on_dead_state_entered() -> void:
 	_animated_sprite.play(&"dead")
+	_animation.play(&"squash")
 	velocity.y = -_DEAD_KNOCKBACK
 
 func _on_dead_state_physics_updated(delta: float) -> void:
