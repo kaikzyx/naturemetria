@@ -16,6 +16,7 @@ const _AUDIO_FADE_TIME := 0.75
 const _AUDIO_MIN_DB := -80.0
 const _AUDIO_MAX_DB := -30.0
 const _INTERVAL_TRANSITION_TIME := 0.5
+var in_transition: bool = false
 var current: Node
 
 func _ready() -> void:
@@ -39,6 +40,7 @@ func change_scene(path: StringName, transition: Transition, interval: float = _I
 			transition_name = &"diamond"
 
 	get_tree().paused = true
+	in_transition = true
 	_transition_animation.play(transition_name + &"_out")
 	await _transition_animation.animation_finished
 
@@ -55,6 +57,9 @@ func change_scene(path: StringName, transition: Transition, interval: float = _I
 
 	get_tree().paused = false
 	_transition_animation.play(transition_name + &"_in")
+
+	await _transition_animation.animation_finished
+	in_transition = false
 
 func music(audio: AudioStream) -> void:
 	var tween := create_tween()
